@@ -1,0 +1,78 @@
+.TextInput i {
+  position: absolute;
+  right: 0;
+  top: 1rem;
+}
+
+.TextInput .error-icon {
+  padding-left: 1rem;
+}
+
+.TextInput {
+  background: transparent;
+  margin:auto;
+  margin-top: 1.5rem;
+  width: 300px;
+  position: relative;
+  border-bottom: 2px solid var(--light-grey);
+  transition: 0.5s ease;
+}
+
+.TextInput.error {
+  border-color: var(--red);
+  color: var(--red);
+}
+.TextInput.error label{
+  color: var(--red);
+}
+
+.TextInput input {
+  display: inline-block;
+  text-shadow:var(--text-shadow);
+  color: var(--white);
+  font-size: 1.2rem;
+  height: 2rem;
+  width: 100%;
+  outline: none;
+  border: none;
+  background: transparent;
+}
+.TextInput label {
+  text-shadow:var(--text-shadow);
+  cursor: text;
+  color:var(--light-grey);
+  font-size: 1.2rem;
+  position: absolute;
+  left: 3px;
+  transform-origin: 0%;
+  transform: translateY(0.7rem);
+  transition: transform 400ms;
+}
+.TextInput:focus-within label,
+.TextInput.value label {
+  transform: scale(0.8) translateY(-1.5rem);
+}
+
+.TextInput::after {
+  content: "";
+  position: relative;
+  display: block;
+  height: 4px;
+  top: 3px;
+  width: 100%;
+  background:radial-gradient(var(--green),var(--purple));
+  transform: scaleX(0);
+  transition: transform 0.5s ease;
+}
+
+.TextInput.error::after {
+  background: var(--red)
+}
+
+.TextInput:focus-within {
+  border-color: transparent;
+}
+
+.TextInput:focus-within:after {
+  transform: scaleX(1);
+}

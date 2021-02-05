@@ -1,0 +1,88 @@
+.NumberInput i {
+  position: absolute;
+  right: 0;
+  top: 1rem;
+}
+
+.NumberInput .error-icon {
+  padding-left: 1rem;
+}
+
+.NumberInput {
+  background: transparent;
+  width: min(300px, 100%);
+  position: relative;
+  border-bottom: 2px solid var(--light-grey);
+  margin: 1.5rem auto;
+  transition: 0.5s ease;
+}
+
+.NumberInput.error {
+  border-color: var(--red);
+  color: var(--red);
+}
+.NumberInput.error label {
+  color: var(--red);
+}
+
+.NumberInput input {
+  display: inline-block;
+  text-shadow: var(--text-shadow);
+  color: var(--white);
+  font-size: 1.2rem;
+  height: 2rem;
+  width: 100%;
+  outline: none;
+  border: none;
+  background: transparent;
+}
+.NumberInput label {
+  text-shadow: var(--text-shadow);
+  cursor: text;
+  color: var(--light-grey);
+  font-size: 1.2rem;
+  position: absolute;
+  left: 3px;
+  transform-origin: 0%;
+  transform: translateY(0.7rem);
+  transition: transform 400ms;
+}
+.NumberInput:focus-within label,
+.NumberInput.value label {
+  transform: scale(0.8) translateY(-1.5rem);
+}
+
+.NumberInput::after {
+  content: "";
+  position: relative;
+  display: block;
+  height: 4px;
+  top: 3px;
+  width: 100%;
+  background: radial-gradient(var(--green), var(--purple));
+  transform: scaleX(0);
+  transition: transform 0.5s ease;
+}
+
+.NumberInput.error::after {
+  background: var(--red);
+}
+
+.NumberInput:focus-within {
+  border-color: transparent;
+}
+
+.NumberInput:focus-within:after {
+  transform: scaleX(1);
+}
+/* hide arrows */
+.NumberInput input::-webkit-outer-spin-button,
+.NumberInput input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.NumberInput input[type="number"] {
+  -moz-appearance: textfield;
+}

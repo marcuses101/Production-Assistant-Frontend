@@ -1,0 +1,44 @@
+.TextArea {
+  color: var(--light-grey);
+  background: transparent;
+  position: relative;
+  width: min(300px, 100%);
+  margin: 2rem auto 1.5rem;
+}
+.TextArea .error-icon {
+  color: var(--red);
+  position: absolute;
+  right: 0;
+}
+
+.TextArea textarea {
+  color: var(--white);
+  background: transparent;
+  font-size: 1.2rem;
+  width: 100%;
+}
+
+.TextArea label {
+  text-shadow: var(--text-shadow);
+  cursor: text;
+  color: var(--light-grey);
+  font-size: 1.2rem;
+  position: absolute;
+  left: 3px;
+  top: -0.7rem;
+  transform-origin: 0%;
+  transform: translateY(0.7rem);
+  transition: transform 400ms;
+}
+.TextArea:focus-within label,
+.TextArea.value label {
+  transform: scale(0.8) translateY(-1.5rem);
+}
+
+.TextArea.error,
+.TextArea.error label {
+  color: var(--red);
+}
+.TextArea.error textarea {
+  box-shadow: 0 0 2px 2px var(--red);
+}
