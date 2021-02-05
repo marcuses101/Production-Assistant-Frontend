@@ -1,29 +1,27 @@
-import React, { useReducer,useState } from "react";
+import React, { useReducer, useState } from "react";
 import { MainContext } from "./MainContext";
 import { projectReducer } from "./projectReducer";
 import { Main } from "./Main";
-import {demoReducer} from './demoReducer'
-import {demoStore} from './demoStore'
+import { demoReducer } from "./demoReducer";
+import { demoStore } from "./demoStore";
 
 function App() {
-  const [isDemo,setIsDemo] = useState(true);
-  const [isLoggedIn,setIsLoggedIn] = useState(true);
-  const [demoData,demoDataDispatch] = useReducer(demoReducer, demoStore )
+  const [isDemo, setIsDemo] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [demoData, demoDispatch] = useReducer(demoReducer, demoStore);
 
   const contextValue = {
     isDemo,
     demoData,
-    demoDataDispatch
+    demoDispatch,
   };
-  const mainProps = {isLoggedIn,setIsLoggedIn}
+  const mainProps = { isLoggedIn, setIsLoggedIn };
 
   return (
     <MainContext.Provider value={contextValue}>
       <div>
         <h1>Hello Production</h1>
-    <Main
-      {...mainProps}
-    />
+        <Main {...mainProps} />
       </div>
     </MainContext.Provider>
   );

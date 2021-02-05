@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { NumberInput } from "./FormComponents/NumberInput";
 import {TextArea} from "./FormComponents/TextArea";
 import { TextInput } from "./FormComponents/TextInput";
+import { useProjectServices } from "./Hooks/useProjectServices";
 
 export function AddProjectForm() {
+  const projectServices = useProjectServices();
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(false);
   const [budget, setBudget] = useState('');
@@ -11,9 +13,9 @@ export function AddProjectForm() {
   const [description, setDescription] = useState("");
   const [descriptionError, setDescriptionError] = useState(false);
 
-  function onSubmit(e) {
+async function onSubmit(e) {
     e.preventDefault();
-    console.log("submit fired");
+   await projectServices.addProject({name,description,budget})
   }
   function onChange(e) {
     console.log(e.target.value);

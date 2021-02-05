@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useGetProjects } from "./Hooks/useGetProjects";
+import {useProjectServices} from './Hooks/useProjectServices'
 
 export function ProjectList() {
   const [projects, setProjects] = useState([]);
-  const getProjects = useGetProjects();
+  const projectServices = useProjectServices();
 
   useEffect(() => {
     (async () => {
-      setProjects(await getProjects());
+      setProjects(await projectServices.getProjects());
     })();
-  }, [getProjects]);
+  }, [projectServices]);
 
   const projectLinks = projects.map((project) => (
     <li key={project.id}>
@@ -20,7 +20,9 @@ export function ProjectList() {
   return (
     <div>
       <h1>Project List</h1>
-      <ul>{projectLinks}</ul>
+      <ul>{projectLinks}
+      <li key='add'><Link to='/project/add'>Add Project</Link></li>
+      </ul>
     </div>
   );
 }
