@@ -3,9 +3,12 @@ import { NumberInput } from "./FormComponents/NumberInput";
 import {TextArea} from "./FormComponents/TextArea";
 import { TextInput } from "./FormComponents/TextInput";
 import { useProjectServices } from "./Hooks/useProjectServices";
+import {useHistory} from 'react-router-dom';
+import { formValidation } from "./utils/formValidation";
 
 export function AddProjectForm() {
   const projectServices = useProjectServices();
+  const {push} = useHistory();
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(false);
   const [budget, setBudget] = useState('');
@@ -13,9 +16,19 @@ export function AddProjectForm() {
   const [description, setDescription] = useState("");
   const [descriptionError, setDescriptionError] = useState(false);
 
+  const validationArray = [
+    {value:name,setError:setNameError,validate(){}}
+  ]
+
 async function onSubmit(e) {
     e.preventDefault();
-   await projectServices.addProject({name,description,budget})
+    if (!formValidation(validationArray)) return
+    try{
+      await projectServices.addProject({name,description,budget})
+      push('/')
+    } catch (error) {
+      console.error(error);
+    }
   }
   function onChange(e) {
     console.log(e.target.value);

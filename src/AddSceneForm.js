@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { TextInput } from "./FormComponents/TextInput";
-import {TextArea} from './FormComponents/TextArea'
+import { TextArea } from "./FormComponents/TextArea";
 import { formValidation } from "./utils/formValidation";
 
 export function AddSceneForm() {
@@ -10,13 +10,25 @@ export function AddSceneForm() {
   const [descriptionError, setDescriptionError] = useState(false);
 
   const validationArray = [
-    {value:name,setError:setNameError,validate(){return this.value.length>5}},
-    {value:description,setError:setDescriptionError,validate(){return this.value}}
-  ]
+    {
+      value: name,
+      setError: setNameError,
+      validate(value) {
+        return value > 5;
+      },
+    },
+    {
+      value: description,
+      setError: setDescriptionError,
+      validate(value) {
+        return value.length > 0;
+      },
+    },
+  ];
 
   function onSubmit(e) {
     e.preventDefault();
-    if(!formValidation(validationArray)) return
+    if (!formValidation(validationArray)) return;
   }
   function onChange(e) {
     const setters = {

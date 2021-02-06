@@ -1,28 +1,12 @@
 import { useContext } from "react";
+import { ProjectAPIServices } from "../API/ProjectAPIServices";
 import { MainContext } from "../MainContext";
-import { useDemoServices } from "./useDemoServices";
+import { useProjectDemoServices } from "./useProjectDemoServices";
 
 export function useProjectServices() {
-  const demoServices = useDemoServices();
+  const ProjectDemoServices = useProjectDemoServices();
+  const { isDemo } = useContext(MainContext);
 
-  const {
-    isDemo,
-    demoData: { projects: demoProjects },
-  } = useContext(MainContext);
-
-
-  return {
-    async getProjects() {
-      if (isDemo) return demoProjects;
-    },
-    async addProject({name,description,budget}){
-      if (isDemo) {
-        demoServices.addProject({name,description,budget});
-        return;
-      }
-    },
-    async editProject({name,description,budget}){
-
-    }
-  };
+  if (isDemo) return ProjectDemoServices;
+  return ProjectAPIServices;
 }

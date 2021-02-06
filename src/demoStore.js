@@ -1,14 +1,14 @@
 export const demoStore = {
   projects: [
     {
-      id: 1,
+      id: '1',
       name: "Project 1",
       description:
         "Consectetur incididunt veniam reprehenderit nisi aute cupidatat laborum irure. Ex minim Lorem ut proident ex magna. Magna voluptate incididunt nostrud est veniam officia proident consequat ut ex anim aute fugiat. Sunt eiusmod sit consequat culpa id. Cillum irure non in minim dolor ut aute nostrud do tempor.",
       budget: 100,
     },
     {
-      id: 2,
+      id: '2',
       name: "Project 2",
       description:
         "Excepteur duis ut cillum excepteur eu irure sint nulla est aute sit in magna laborum. Deserunt sit et enim velit nulla nisi dolore. Magna ex duis aute reprehenderit aliquip in voluptate ea culpa laboris commodo anim adipisicing. Non consequat proident ullamco consequat qui fugiat aute.",
