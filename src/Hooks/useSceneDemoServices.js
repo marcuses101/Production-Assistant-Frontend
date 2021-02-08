@@ -2,7 +2,6 @@ import { v4 as uuid } from "uuid";
 import { DEMO_ACTIONS } from "../demoReducer";
 import { useContext } from "react";
 import { MainContext } from "../MainContext";
-import { useDemoServices } from "./useDemoServices";
 
 export function useSceneDemoServices() {
   const {

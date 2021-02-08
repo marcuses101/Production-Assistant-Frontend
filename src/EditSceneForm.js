@@ -10,10 +10,8 @@ export default function EditSceneForm() {
 
   function onSubmit(e) {
     e.preventDefault();
-    console.log("submit fired");
   }
   function onChange(e) {
-    console.log(e.target.value);
     const setters = {
       name: setName,
       description: setDescription,

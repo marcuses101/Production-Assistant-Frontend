@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { TextInput } from "./FormComponents/TextInput";
 import { TextArea } from "./FormComponents/TextArea";
-import { formValidation } from "./utils/formValidation";
+import { useFormValidation } from "./Hooks/useFormValidation";
 
 export function AddSceneForm() {
+  const formValidation = useFormValidation();
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(false);
   const [description, setDescription] = useState("");

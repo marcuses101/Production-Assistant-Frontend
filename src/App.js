@@ -1,27 +1,36 @@
 import React, { useReducer, useState } from "react";
 import { MainContext } from "./MainContext";
-import { projectReducer } from "./projectReducer";
-import { Main } from "./Main";
 import { demoReducer } from "./demoReducer";
 import { demoStore } from "./demoStore";
+import { AppRouter } from "./AppRouter";
+import { LoginRouter } from "./LoginRouter";
+import { Sidenav } from "./Sidenav";
 
 function App() {
   const [isDemo, setIsDemo] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [demoData, demoDispatch] = useReducer(demoReducer, demoStore);
 
   const contextValue = {
     isDemo,
     demoData,
     demoDispatch,
+    setIsDemo,
+    setIsLoggedIn,
   };
-  const mainProps = { isLoggedIn, setIsLoggedIn };
 
   return (
     <MainContext.Provider value={contextValue}>
       <div>
         <h1>Hello Production</h1>
-        <Main {...mainProps} />
+        {isLoggedIn ? (
+          <>
+            <Sidenav />
+            <AppRouter />
+          </>
+        ) : (
+          <LoginRouter />
+        )}
       </div>
     </MainContext.Provider>
   );

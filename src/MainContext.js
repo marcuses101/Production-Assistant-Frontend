@@ -1,7 +1,9 @@
 import {createContext} from 'react'
 
 export const MainContext = createContext({
-  isDemo:null,
+  isDemo:false,
   demoData:{},
-  demoDispatch(){}
+  demoDispatch(){},
+  setIsDemo(){},
+  setIsLoggedIn(){}
 })

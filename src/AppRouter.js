@@ -11,7 +11,6 @@ import { ItemList } from './ItemList'
 
 export function AppRouter() {
   return (
-    <main className="AppRouter">
       <Switch>
 
         <Route path='/project/:projectId/scene/add' component={AddSceneForm}/>
@@ -26,6 +25,5 @@ export function AppRouter() {
         <Route path='/' component={ProjectList}/>
 
       </Switch>
-    </main>
   )
 }

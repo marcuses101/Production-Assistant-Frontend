@@ -4,12 +4,12 @@ import { Landing } from "./Landing";
 import { AddUserForm } from "./AddUserForm";
 import { LoginForm } from "./LoginForm";
 
-export function LoginRouter() {
+export function LoginRouter(props) {
   return (
     <Switch>
       <Route path="/login" component={LoginForm} />
       <Route path="/new-user" component={AddUserForm} />
-      <Route exact path="/" component={Landing} />
+      <Route path="/" component={Landing} />
     </Switch>
   );
 }

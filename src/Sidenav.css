@@ -1,0 +1,23 @@
+.Sidenav {
+  background-color: var(--lighten);
+  position:fixed;
+  height: 100vh;
+  top:0;
+  width: 25vh;
+  border-radius:0 var(--br) var(--br) 0;
+}
+
+.Sidenav ul{
+  display:flex;
+  flex-direction: column;
+  align-content: center;
+  height:100%;
+  padding-top: 1rem;
+  padding-bottom:1rem;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.Sidenav ul li:last-child{
+  margin-top:auto;
+}

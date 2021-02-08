@@ -19,7 +19,7 @@ export function ProjectLanding() {
       const project = await projectServices.getProjectById(projectId);
       setProject(project);
     })();
-  }, [projectServices]);
+  }, [projectId, projectServices]);
   return (
     <div>
       <h1>{project?.name}</h1>

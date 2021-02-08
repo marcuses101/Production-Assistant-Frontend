@@ -4,9 +4,10 @@ import {TextArea} from "./FormComponents/TextArea";
 import { TextInput } from "./FormComponents/TextInput";
 import { useProjectServices } from "./Hooks/useProjectServices";
 import {useHistory} from 'react-router-dom';
-import { formValidation } from "./utils/formValidation";
+import { useFormValidation } from "./Hooks/useFormValidation";
 
 export function AddProjectForm() {
+  const formValidation = useFormValidation();
   const projectServices = useProjectServices();
   const {push} = useHistory();
   const [name, setName] = useState("");
@@ -17,7 +18,7 @@ export function AddProjectForm() {
   const [descriptionError, setDescriptionError] = useState(false);
 
   const validationArray = [
-    {value:name,setError:setNameError,validate(){}}
+    {value:name,setError:setNameError,validate(){return name.length > 8}}
   ]
 
 async function onSubmit(e) {
@@ -31,7 +32,6 @@ async function onSubmit(e) {
     }
   }
   function onChange(e) {
-    console.log(e.target.value);
     const setters = {
       name: setName,
       budget: setBudget,
@@ -66,7 +66,7 @@ async function onSubmit(e) {
         />
         <div className="flex-center">
           <button type="submit">Submit</button>
-          <button className="cancel">Cancel</button>
+          <button type='button' className="cancel" onClick={()=>push('/')}>Cancel</button>
         </div>
       </form>
     </section>
