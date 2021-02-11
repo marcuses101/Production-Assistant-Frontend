@@ -21,17 +21,7 @@ function App() {
 
   return (
     <MainContext.Provider value={contextValue}>
-      <div>
-        <h1>Hello Production</h1>
-        {isLoggedIn ? (
-          <>
-            <Sidenav />
-            <AppRouter />
-          </>
-        ) : (
-          <LoginRouter />
-        )}
-      </div>
+        {isLoggedIn ? <AppRouter /> : <LoginRouter />}
     </MainContext.Provider>
   );
 }

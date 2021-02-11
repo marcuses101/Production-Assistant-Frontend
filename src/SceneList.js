@@ -1,16 +1,23 @@
-import React, { useState, useEffect } from "react";
-import {useSceneServices} from './Hooks/useSceneServices'
-import {useParamsProjectId} from './Hooks/useParamsProjectId'
+import React from "react";
+import { Link } from "react-router-dom";
 
-export function SceneList() {
-  const projectId = useParamsProjectId();
-  const [scenes, setScenes] = useState([]);
-  const sceneServices = useSceneServices();
+export function SceneList({ projectId, scenes }) {
+  const sceneItems = scenes.map((scene) => (
+    <li key={scene.id}>
+      {scene.name}
+      <Link to={`/project/${projectId}/scene/edit/${scene.id}`}>edit</Link>
+    </li>
+  ));
 
-  useEffect(()=>{
-    (async ()=>{
-     const scenes = await sceneServices.getProjectScenes(projectId);
-     setScenes(scenes);
-    })()
-  },[projectId, sceneServices])
+  return (
+    <section className="SceneList">
+      <h2>Scene List</h2>
+      <ul>
+        {sceneItems}
+        <li key="add">
+          <Link to={`/project/${projectId}/scene/add`}>Add Scene</Link>
+        </li>
+      </ul>
+    </section>
+  );
 }

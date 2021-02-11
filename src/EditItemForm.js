@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { QuantityInput } from "./FormComponents/QuantityInput";
 import { NumberInput } from "./FormComponents/NumberInput";
 import { TextArea } from "./FormComponents/TextArea";
@@ -6,13 +6,15 @@ import { TextInput } from "./FormComponents/TextInput";
 import { useFormValidation } from "./Hooks/useFormValidation";
 import { useItemServices } from "./Hooks/useItemServices";
 import { useToast } from "./Hooks/useToast";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
-export function AddItemForm({ projectId }) {
+export function EditItemForm({ projectId }) {
   const toast = useToast();
+  const {itemId} = useParams();
   const {push} = useHistory();
   const validateForm = useFormValidation();
   const itemServices = useItemServices();
+
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(false);
   const [lowEstimate, setLowEstimate] = useState(0);
@@ -33,18 +35,26 @@ export function AddItemForm({ projectId }) {
       validate: () => description,
     },
   ];
-  function reset(){
-    setName('');
-    setQuantity(1);
-    setDescription('')
-    setLowEstimate(0);
-    setHighEstimate(0);
+
+  function populateForm({name,description,lowEstimate,highEstimate,quantity}){
+    setName(name);
+    setDescription(description);
+    setLowEstimate(lowEstimate);
+    setHighEstimate(highEstimate);
+    setQuantity(quantity)
   }
+
+  useEffect(()=>{
+    (async ()=>{
+      populateForm(await itemServices.getItemById(itemId))
+    })()
+  },[])
+
   async function onSubmit(e) {
     e.preventDefault();
     if (!validateForm(validationArray)) return;
     try {
-      await itemServices.addItem({
+      await itemServices.editItem({
         projectId,
         name,
         description,
@@ -52,8 +62,7 @@ export function AddItemForm({ projectId }) {
         lowEstimate,
         quantity
       });
-      toast({message:`${name} added`, type:'success'})
-      reset();
+      toast({message:`${name} updated`, type:'success'})
     } catch (error) {
       toast({ message: "server error", type: 'error' });
     }
@@ -70,7 +79,7 @@ export function AddItemForm({ projectId }) {
   return (
     <section className="AddSceneForm">
       <form onSubmit={onSubmit}>
-        <h1>Add Item</h1>
+        <h1>Edit Item</h1>
         <div
           style={{
             display: "flex",

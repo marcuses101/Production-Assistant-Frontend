@@ -13,14 +13,20 @@ export function useSceneDemoServices() {
     async getProjectScenes(projectId) {
       return scenes.filter((scene) => scene.projectId === projectId);
     },
+
+    async getSceneById(sceneId){
+      return scenes.find(({id})=>{
+        return id.toString()===sceneId.toString()})
+    },
+
     async addScene({ projectId, name, description }) {
       const scene = { projectId, name, description, id: uuid(), items:[] };
       demoDispatch({ type: DEMO_ACTIONS.SCENE_ADD, payload: scene });
       return scene;
     },
 
-    async editScene({ projectId, name, description, id }) {
-      const scene = { projectId, name, description, id };
+    async editScene({name, description, id }) {
+      const scene = { name, description, id };
       demoDispatch({ type: DEMO_ACTIONS.SCENE_EDIT, payload: scene });
       return scene;
     },

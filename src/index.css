@@ -7,7 +7,7 @@
   --dark-grey: hsla(0, 0%, 100%, 0.38);
   --green: hsla(165, 75%, 40%, 0.87);
   --purple: hsla(279, 68%, 75%, 0.87);
-  --red: hsla(0, 75%,68%, 0.87);
+  --red: hsla(0, 75%, 68%, 0.87);
   --background-purple: hsla(279, 33%, 7%, 1);
   --background-green: hsla(165, 33%, 7%, 1);
 
@@ -15,7 +15,7 @@
   --text-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
   --box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.3);
   --box-shadow-chill: 0 0 2px 7px rgba(0, 0, 0, 0.1);
-  --box-shadow-outline: 0 0 1px 1px hsla(0,0%,100%,0.6);
+  --box-shadow-outline: 0 0 1px 1px hsla(0, 0%, 100%, 0.6);
   --br: 1rem;
   --time: 200ms;
 }
@@ -41,7 +41,9 @@ html {
   box-sizing: border-box;
 }
 
-*,*:before,*:after{
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -55,8 +57,13 @@ h6 {
   text-align: center;
 }
 h1 {
-  color: var(--green);
-  text-shadow: var(--text-shadow);
+  margin: 0 auto;
+  width: fit-content;
+  color: transparent;
+  background: linear-gradient(to right, var(--purple), var(--green)),
+    var(--black);
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 h2 {
   color: var(--purple);
@@ -68,35 +75,29 @@ code {
     monospace;
 }
 
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
 section {
   padding: 1rem;
-  width: min(95%, 600px);
   border-radius: var(--br);
   background-color: var(--lighten);
   box-shadow: var(--box-shadow);
 }
 
-ul{
+ul {
   list-style-type: none;
   padding-inline-start: 0;
 }
 
 li {
-  margin: .5rem;
+  margin: 0.5rem;
   display: flex;
-  justify-content:center;
+  justify-content: center;
 }
 
 a {
-  display:inline-block
+  display: inline-block;
 }
-button, a {
+button,
+a {
   padding: 0.5rem;
   font-size: 1.2rem;
   font-weight: 600;
@@ -105,19 +106,22 @@ button, a {
   box-shadow: var(--box-shadow-chill);
   border: none;
 }
-button:hover, a:hover{
+button:hover,
+a:hover {
   background-color: var(--white);
   cursor: pointer;
 }
-button:focus, textarea:focus{
+button:focus,
+textarea:focus {
   outline: 0;
   box-shadow: 0 0 2px 2px hsla(0, 0%, 100%, 0.87);
 }
-button:active, a:active{
+button:active,
+a:active {
   background-color: var(--light-grey);
 }
-textarea{
-  border:none;
+textarea {
+  border: none;
   border-radius: 5px;
   box-shadow: var(--box-shadow-outline);
 }
@@ -147,8 +151,8 @@ input[type="submit"]:hover {
   cursor: pointer;
 }
 
-.flex-center{
-  display:flex;
+.flex-center {
+  display: flex;
   justify-content: center;
   align-items: center;
 }

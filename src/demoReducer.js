@@ -27,7 +27,7 @@ export function demoReducer(state, { type, payload }) {
       return {
         ...state,
         projects: state.projects.map((project) =>
-          id === project.id ? projectToUpdate : project
+          id.toString() === project.id.toString() ? projectToUpdate : project
         ),
       };
     }
@@ -36,7 +36,9 @@ export function demoReducer(state, { type, payload }) {
       const id = payload;
       return {
         ...state,
-        projects: state.projects.filter((project) => project.id !== id),
+        projects: state.projects.filter(
+          (project) => project.id.toString() !== id.toString()
+        ),
       };
     }
 
@@ -51,7 +53,9 @@ export function demoReducer(state, { type, payload }) {
       return {
         ...state,
         scenes: state.scenes.map((scene) =>
-          id === scene.id ? { ...scene, ...sceneToUpdate } : scene
+          id.toString() === scene.id.toString()
+            ? { ...scene, ...sceneToUpdate }
+            : scene
         ),
       };
     }
@@ -60,7 +64,9 @@ export function demoReducer(state, { type, payload }) {
       const id = payload;
       return {
         ...state,
-        scenes: state.scenes.filter((scene) => scene.id !== id),
+        scenes: state.scenes.filter(
+          (scene) => scene.id.toString() !== id.toString()
+        ),
       };
     }
 
@@ -69,7 +75,7 @@ export function demoReducer(state, { type, payload }) {
       return {
         ...state,
         scenes: state.scenes.map((scene) =>
-          scene.id === sceneId
+          scene.id.toString() === sceneId.toString()
             ? { ...scene, items: [...scene.items, itemId] }
             : scene
         ),
@@ -81,7 +87,7 @@ export function demoReducer(state, { type, payload }) {
       return {
         ...state,
         scenes: state.scenes.map((scene) =>
-          scene.id === sceneId
+          scene.id.toString() === sceneId.toString()
             ? { ...scene, items: scene.items.filter((id) => id === itemId) }
             : scene
         ),
@@ -102,7 +108,7 @@ export function demoReducer(state, { type, payload }) {
       return {
         ...state,
         items: state.items.map((item) =>
-          item.id === id ? itemToUpdate : item
+          item.id.toString() === id.toString() ? itemToUpdate : item
         ),
       };
     }
@@ -113,9 +119,13 @@ export function demoReducer(state, { type, payload }) {
         ...state,
         scenes: state.scenes.map((scene) => ({
           ...scene,
-          items: scene.items.filter((item) => item.id !== id),
+          items: scene.items.filter(
+            (item) => item.id.toString() !== id.toString()
+          ),
         })),
-        items: state.items.filter((item) => item.id === id),
+        items: state.items.filter(
+          (item) => item.id.toString() === id.toString()
+        ),
       };
     }
     default:

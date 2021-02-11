@@ -1,9 +1,5 @@
 .Sidenav {
   background-color: var(--lighten);
-  position:fixed;
-  height: 100vh;
-  top:0;
-  width: 25vh;
   border-radius:0 var(--br) var(--br) 0;
 }
 

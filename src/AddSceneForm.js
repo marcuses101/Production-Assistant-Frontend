@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import { TextInput } from "./FormComponents/TextInput";
 import { TextArea } from "./FormComponents/TextArea";
 import { useFormValidation } from "./Hooks/useFormValidation";
+import { useHistory } from "react-router-dom";
+import { useSceneServices } from "./Hooks/useSceneServices";
+import { useParamsProjectId } from "./Hooks/useParamsProjectId";
 
 export function AddSceneForm() {
+  const { goBack } = useHistory();
+  const projectId = useParamsProjectId();
   const formValidation = useFormValidation();
+  const sceneServices = useSceneServices();
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(false);
   const [description, setDescription] = useState("");
@@ -12,24 +18,30 @@ export function AddSceneForm() {
 
   const validationArray = [
     {
-      value: name,
+      message: "name is required",
       setError: setNameError,
-      validate(value) {
-        return value > 5;
+      validate() {
+        return name;
       },
     },
     {
-      value: description,
+      message: "description is required",
       setError: setDescriptionError,
-      validate(value) {
-        return value.length > 0;
+      validate() {
+        return description;
       },
     },
   ];
 
-  function onSubmit(e) {
+ async function onSubmit(e) {
     e.preventDefault();
     if (!formValidation(validationArray)) return;
+    try {
+      await sceneServices.addScene({projectId,name,description})
+      goBack();
+    } catch (error) {
+      return
+    }
   }
   function onChange(e) {
     const setters = {
@@ -58,7 +70,9 @@ export function AddSceneForm() {
         />
         <div className="flex-center">
           <button type="submit">Submit</button>
-          <button className="cancel">Cancel</button>
+          <button type="button" className="cancel" onClick={goBack}>
+            Cancel
+          </button>
         </div>
       </form>
     </section>

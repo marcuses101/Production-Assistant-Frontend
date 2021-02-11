@@ -1,9 +1,22 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
 
-export function ItemList() {
+
+export function ItemList({items,projectId}) {
+
+  const listItems = items.map((item) => (
+    <li key={item.id}>
+      {item.name}
+      <Link to={`/project/${projectId}/item/${item.id}/edit`}>edit</Link>
+    </li>
+  ));
+
   return (
-    <div>
-<h1>Item List</h1>
-    </div>
-  )
+    <section>
+      <h2>Item List</h2>
+      <ul>{listItems}
+      <li key='addItem'><Link to={`/project/${projectId}/item/add`}>Add Item</Link></li>
+      </ul>
+    </section>
+  );
 }

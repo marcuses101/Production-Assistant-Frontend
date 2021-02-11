@@ -1,32 +1,34 @@
 import React, { useState } from "react";
 import { NumberInput } from "./FormComponents/NumberInput";
-import {TextArea} from "./FormComponents/TextArea";
+import { TextArea } from "./FormComponents/TextArea";
 import { TextInput } from "./FormComponents/TextInput";
 import { useProjectServices } from "./Hooks/useProjectServices";
-import {useHistory} from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import { useFormValidation } from "./Hooks/useFormValidation";
 
 export function AddProjectForm() {
   const formValidation = useFormValidation();
   const projectServices = useProjectServices();
-  const {push} = useHistory();
+  const { push } = useHistory();
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(false);
-  const [budget, setBudget] = useState('');
+  const [budget, setBudget] = useState("");
   const [budgetError, setBudgetError] = useState(false);
   const [description, setDescription] = useState("");
   const [descriptionError, setDescriptionError] = useState(false);
 
   const validationArray = [
-    {value:name,setError:setNameError,validate(){return name.length > 8}}
-  ]
+    {message:'Name is required',setError: setNameError, validate: () => name},
+    {message: 'Description is required',setError: setDescriptionError, validate:()=>description},
+    {message: 'budget is required',setError:setBudgetError, validate:()=>budget}
+  ];
 
-async function onSubmit(e) {
+  async function onSubmit(e) {
     e.preventDefault();
-    if (!formValidation(validationArray)) return
-    try{
-      await projectServices.addProject({name,description,budget})
-      push('/')
+    if (!formValidation(validationArray)) return;
+    try {
+      await projectServices.addProject({ name, description, budget });
+      push("/");
     } catch (error) {
       console.error(error);
     }
@@ -40,14 +42,14 @@ async function onSubmit(e) {
     setters[e.target.id](e.target.value);
   }
   return (
-    <section className='AddProjectForm'>
+    <section className="AddProjectForm">
       <form onSubmit={onSubmit}>
         <h1>Add Project</h1>
         <TextInput
           label="Name:"
           value={name}
           error={nameError}
-          id='name'
+          id="name"
           onChange={onChange}
         />
         <TextArea
@@ -60,13 +62,15 @@ async function onSubmit(e) {
         <NumberInput
           label="Budget($)"
           value={budget}
-          id='budget'
-          error={descriptionError}
+          id="budget"
+          error={budgetError}
           onChange={onChange}
         />
         <div className="flex-center">
           <button type="submit">Submit</button>
-          <button type='button' className="cancel" onClick={()=>push('/')}>Cancel</button>
+          <button type="button" className="cancel" onClick={() => push("/")}>
+            Cancel
+          </button>
         </div>
       </form>
     </section>

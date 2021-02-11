@@ -6,7 +6,6 @@ export function useFormValidation() {
     if (validationArray == null || validationArray.length === 0) return;
     let isValid = true;
     validationArray.forEach(({ value, setError, validate, message }) => {
-      let isValid = true;
       if (!validate(value)) {
         setError(true);
         if (message) toast({ message, type: "error" });

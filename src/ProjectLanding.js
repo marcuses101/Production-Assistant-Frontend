@@ -1,28 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { useParamsProjectId } from "./Hooks/useParamsProjectId";
-import { useProjectServices } from "./Hooks/useProjectServices";
+import { BudgetChart } from "./BudgetChart";
+import { useItemServices } from "./Hooks/useItemServices";
+import { useSceneServices } from "./Hooks/useSceneServices";
+import { ItemList } from "./ItemList";
+import { SceneList } from "./SceneList";
 
-export function ProjectLanding() {
-  const projectId = useParamsProjectId();
-  const [project, setProject] = useState({
-    id: null,
-    name: "",
-    description: "",
-    budget: 0,
-  });
-
-  const projectServices = useProjectServices();
+export function ProjectDashboard({ project, setProject }) {
+  const [scenes, setScenes] = useState([]);
+  const sceneServices = useSceneServices();
+  const [items, setItems] = useState([]);
+  const itemServices = useItemServices();
 
   useEffect(() => {
     (async () => {
-      console.log("test");
-      const project = await projectServices.getProjectById(projectId);
-      setProject(project);
+      const [scenes, items] = await Promise.all([
+        sceneServices.getProjectScenes(project.id),
+        itemServices.getProjectItems(project.id),
+      ]);
+      setScenes(scenes);
+      setItems(items);
     })();
-  }, [projectId, projectServices]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [project]);
+
   return (
     <div>
-      <h1>{project?.name}</h1>
+      <SceneList scenes={scenes} projectId={project.id}/>
+      <ItemList items={items} projectId={project.id}/>
+      <BudgetChart totalBudget={project.budget} items={items} />
     </div>
   );
 }
