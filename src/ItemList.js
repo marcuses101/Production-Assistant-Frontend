@@ -6,8 +6,8 @@ export function ItemList({items,projectId}) {
 
   const listItems = items.map((item) => (
     <li key={item.id}>
-      {item.name}
-      <Link to={`/project/${projectId}/item/${item.id}/edit`}>edit</Link>
+
+      <Link to={`/project/${projectId}/item/${item.id}/edit`}> {item.name}</Link>
     </li>
   ));
 
@@ -15,7 +15,7 @@ export function ItemList({items,projectId}) {
     <section>
       <h2>Item List</h2>
       <ul>{listItems}
-      <li key='addItem'><Link to={`/project/${projectId}/item/add`}>Add Item</Link></li>
+      <li key='addItem'><Link to={`/project/${projectId}/item/add`}>+ Add Item</Link></li>
       </ul>
     </section>
   );

@@ -105,6 +105,8 @@ a {
   background-color: var(--light-grey);
   box-shadow: var(--box-shadow-chill);
   border: none;
+  text-decoration: none;
+  text-shadow: 1px 1px 3px hsla(0, 0%, 100%, 0.4)
 }
 button:hover,
 a:hover {

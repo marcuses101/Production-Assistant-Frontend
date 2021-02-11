@@ -3,7 +3,7 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { EditProjectForm } from "./EditProjectForm";
 import { AddItemForm } from "./AddItemForm";
 import { EditItemForm } from "./EditItemForm";
-import { ProjectDashboard } from "./ProjectLanding";
+import { ProjectDashboard } from "./ProjectDashboard";
 import { AddSceneForm } from "./AddSceneForm";
 import EditSceneForm from "./EditSceneForm";
 import { ItemList } from "./ItemList";
@@ -11,6 +11,7 @@ import { Sidenav } from "./Sidenav";
 import "./ProjectRouter.css";
 import { useProjectServices } from "./Hooks/useProjectServices";
 import { useParamsProjectId } from "./Hooks/useParamsProjectId";
+import { ShoppingList } from "./ShoppingList";
 
 export function ProjectRouter() {
   const { path } = useRouteMatch();
@@ -43,7 +44,9 @@ export function ProjectRouter() {
           <Route path="/project/:projectId/item/:itemId/edit">
             <EditItemForm projectId={projectId} />
           </Route>
-          <Route path="/project/:projectId/item" component={ItemList} />
+          <Route path="/project/:projectId/item" >
+            <ShoppingList projectId={projectId}/>
+          </Route>
           <Route path="/project/:projectId/edit">
             <EditProjectForm
               editProject={(project) =>

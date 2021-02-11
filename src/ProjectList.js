@@ -19,7 +19,7 @@ export function ProjectList() {
   ));
   return (
     <div>
-      <h1>Project List</h1>
+      <h2>Project List</h2>
       <ul>{projectLinks}
       <li key='add'><Link to='/project/add'>Add Project</Link></li>
       </ul>

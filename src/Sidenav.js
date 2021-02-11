@@ -14,7 +14,7 @@ export function Sidenav() {
         <li><Link to={`/project/${projectId}/scene/add`}>Add Scene</Link></li>
         <li><Link to={`/project/${projectId}/edit`}>Edit Project</Link></li>
         <li><Link to={`/project/${projectId}/item/add`}>Add Item</Link></li>
-        <li><Link to=''></Link></li>
+        <li><Link to={`/project/${projectId}/item`}>ShoppingList</Link></li>
         <li><Link to='/project'>Change Project</Link></li>
         <li>
           <button onClick={loginActions.logout}>Logout</button>

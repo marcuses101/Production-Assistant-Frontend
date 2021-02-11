@@ -45,7 +45,7 @@ export function LoginForm() {
   return (
     <section className="AddUserForm">
       <form onSubmit={handleSubmit}>
-        <h1>User Login</h1>
+        <h2>User Login</h2>
         <TextInput
           id="username"
           label="Username"

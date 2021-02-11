@@ -53,7 +53,7 @@ export function AddUserForm() {
   return (
     <section className="AddUserForm">
       <form onSubmit={handleSubmit}>
-        <h1>Add User</h1>
+        <h2>Add User</h2>
         <TextInput
           id="username"
           label="Username"

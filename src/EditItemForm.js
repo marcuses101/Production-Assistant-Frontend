@@ -79,7 +79,7 @@ export function EditItemForm({ projectId }) {
   return (
     <section className="AddSceneForm">
       <form onSubmit={onSubmit}>
-        <h1>Edit Item</h1>
+        <h2>Edit Item</h2>
         <div
           style={{
             display: "flex",

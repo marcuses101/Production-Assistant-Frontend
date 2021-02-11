@@ -53,7 +53,7 @@ export function AddSceneForm() {
   return (
     <section className="AddSceneForm">
       <form onSubmit={onSubmit}>
-        <h1>Add Scene</h1>
+        <h2>Add Scene</h2>
         <TextInput
           label="Name:"
           value={name}

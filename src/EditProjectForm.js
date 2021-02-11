@@ -45,7 +45,7 @@ export function EditProjectForm({editProject}) {
   return (
     <section className="EditProjectForm">
       <form onSubmit={onSubmit}>
-        <h1>Edit Project</h1>
+        <h2>Edit Project</h2>
         <TextInput
           label="Name:"
           value={name}

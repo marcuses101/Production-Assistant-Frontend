@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 export function SceneList({ projectId, scenes }) {
   const sceneItems = scenes.map((scene) => (
     <li key={scene.id}>
+      <Link to={`/project/${projectId}/scene/edit/${scene.id}`}>
+
       {scene.name}
-      <Link to={`/project/${projectId}/scene/edit/${scene.id}`}>edit</Link>
+      </Link>
     </li>
   ));
 
@@ -15,7 +17,7 @@ export function SceneList({ projectId, scenes }) {
       <ul>
         {sceneItems}
         <li key="add">
-          <Link to={`/project/${projectId}/scene/add`}>Add Scene</Link>
+          <Link to={`/project/${projectId}/scene/add`}>+ Add Scene</Link>
         </li>
       </ul>
     </section>
