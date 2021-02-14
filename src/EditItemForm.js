@@ -48,6 +48,7 @@ export function EditItemForm({ projectId }) {
     (async ()=>{
       populateForm(await itemServices.getItemById(itemId))
     })()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   async function onSubmit(e) {

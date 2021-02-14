@@ -20,7 +20,6 @@ export function AddItemForm({ projectId }) {
   const [quantity, setQuantity] = useState(1);
   const [description, setDescription] = useState("");
   const [descriptionError, setDescriptionError] = useState(false);
-  console.log(projectId);
   const validationArray = [
     {
       message: "Name is required",

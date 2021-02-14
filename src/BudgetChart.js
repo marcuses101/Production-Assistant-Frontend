@@ -1,11 +1,9 @@
 import { Pie } from "react-chartjs-2";
 
-export function BudgetChart({ totalBudget, items }) {
-  console.log(totalBudget);
-  const amountSpent = items.reduce((total, { actualCost, acquired }) => {
-    console.log(actualCost);
-    return acquired ? total + (actualCost || 0) : total;
-  }, 0);
+export function BudgetChart({ totalBudget, acquisitions = [] }) {
+  const amountSpent = acquisitions.reduce((amountSpent,{total})=>{
+    return amountSpent+total;
+  },0)
   const data = {
     datasets: [
       {
@@ -21,10 +19,16 @@ export function BudgetChart({ totalBudget, items }) {
           duration: 0
       }
   }
+
+
   return (
     <section style={{ minWidth: 0 }}>
       <h2>Budget</h2>
-      <Pie data={data} options={options}/>
+      {
+        amountSpent>totalBudget
+        ?<h3 style={{color:'var(--red)', padding:'1rem', textShadow:'var(--text-shadow)'}}>${amountSpent-totalBudget} over budget</h3>
+        :<Pie data={data} options={options}/>
+      }
     </section>
   );
 }

@@ -5,9 +5,11 @@ import { useSceneServices } from "./Hooks/useSceneServices";
 import { useParamsSceneId } from "./Hooks/useParamsSceneId";
 import { useHistory } from "react-router-dom";
 import { useFormValidation } from "./Hooks/useFormValidation";
+import { useToast } from "./Hooks/useToast";
 
 export default function EditSceneForm() {
   const { goBack } = useHistory();
+  const toast = useToast();
   const formValidation = useFormValidation();
   const sceneServices = useSceneServices();
   const sceneId = useParamsSceneId();
@@ -18,12 +20,16 @@ export default function EditSceneForm() {
 
   useEffect(() => {
     (async () => {
-      console.log(sceneId);
-      const { name, description } = await sceneServices.getSceneById(sceneId);
-      setName(name);
-      setDescription(description);
+      try {
+        const { name, description } = await sceneServices.getSceneById(sceneId);
+        setName(name);
+        setDescription(description);
+      } catch (error) {
+        toast.error('server Error')
+      }
     })();
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sceneId]);
 
   const validationArray = [
     {

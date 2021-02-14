@@ -4,7 +4,6 @@ import { demoReducer } from "./demoReducer";
 import { demoStore } from "./demoStore";
 import { AppRouter } from "./AppRouter";
 import { LoginRouter } from "./LoginRouter";
-import { Sidenav } from "./Sidenav";
 
 function App() {
   const [isDemo, setIsDemo] = useState(true);

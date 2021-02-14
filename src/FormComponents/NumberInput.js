@@ -16,6 +16,7 @@ export function NumberInput({ id, label, value, onChange, error }) {
         onChange={onChange}
         value={value}
       />
+      {error && <i className="fas fa-exclamation-triangle error-icon"></i>}
     </div>
   );
 }

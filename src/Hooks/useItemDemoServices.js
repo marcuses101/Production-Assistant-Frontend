@@ -39,17 +39,16 @@ export function useItemDemoServices() {
         highEstimate,
         lowEstimate,
         quantity,
-        acquired: false,
-        actualCost: null,
+        location: null,
       };
       demoDispatch({ type: DEMO_ACTIONS.ITEM_ADD, payload: item });
       return item;
     },
 
-    async editItem({ projectId, id, name, description }) {
+    async editItem({ projectId, id, name, description, highEstimate,lowEstimate,location}) {
       demoDispatch({
         type: DEMO_ACTIONS.ITEM_EDIT,
-        payload: { projectId, id, name, description },
+        payload: { projectId, id, name, description, lowEstimate,highEstimate,location },
       });
       return;
     },

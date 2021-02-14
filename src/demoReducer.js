@@ -12,10 +12,16 @@ export const DEMO_ACTIONS = {
   ITEM_ADD: "ITEM_ADD",
   ITEM_EDIT: "ITEM_EDIT",
   ITEM_REMOVE: "ITEM_REMOVE",
+
+  ACQUISITION_ADD: 'ACQUISITION_ADD',
+  ACQUISITION_REMOVE: 'ACQUISITION_REMOVE',
+  ACQUISITION_EDIT: 'ACQUISITION EDIT'
 };
 
 export function demoReducer(state, { type, payload }) {
   switch (type) {
+
+    //Project actions
     case DEMO_ACTIONS.PROJECT_ADD: {
       const newProject = payload;
       return { ...state, projects: [...state.projects, newProject] };
@@ -41,7 +47,7 @@ export function demoReducer(state, { type, payload }) {
         ),
       };
     }
-
+    //scene actions
     case DEMO_ACTIONS.SCENE_ADD: {
       const newScene = payload;
       return { ...state, scenes: [...state.scenes, newScene] };
@@ -93,7 +99,7 @@ export function demoReducer(state, { type, payload }) {
         ),
       };
     }
-
+    //item actions
     case DEMO_ACTIONS.ITEM_ADD: {
       const newItem = payload;
       return {
@@ -127,6 +133,30 @@ export function demoReducer(state, { type, payload }) {
           (item) => item.id.toString() === id.toString()
         ),
       };
+    }
+
+    //acquisition actions
+    case DEMO_ACTIONS.ACQUISITION_ADD: {
+      return {
+        ...state,
+        acquisitions: [...state.acquisitions,payload]
+      }
+    }
+
+    case DEMO_ACTIONS.ACQUISITION_REMOVE:{
+      const idToRemove = payload
+      return {
+        ...state,
+        acquisitions: state.acquisitions.filter(({id})=>id.toString()!==idToRemove.toString())
+      }
+    }
+
+    case DEMO_ACTIONS.ACQUISITION_EDIT:{
+      const {id} = payload
+      return {
+        ...state,
+        acquisitions: state.acquisitions.map(acquisition=>acquisition.id.toString()===id.toString()?{...acquisition,...payload}:acquisition)
+      }
     }
     default:
       return state;

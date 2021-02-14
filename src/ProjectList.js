@@ -21,7 +21,7 @@ export function ProjectList() {
     <div>
       <h2>Project List</h2>
       <ul>{projectLinks}
-      <li key='add'><Link to='/project/add'>Add Project</Link></li>
+      <li key='add'><Link to='/project/add'>+ Add Project</Link></li>
       </ul>
     </div>
   );

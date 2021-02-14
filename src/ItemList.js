@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 
-export function ItemList({items,projectId}) {
+export function ItemList({items = [] ,projectId}) {
 
   const listItems = items.map((item) => (
     <li key={item.id}>

@@ -1,0 +1,11 @@
+.AddAcquisitionForm select {
+  font-size: 1.2rem;
+  color: var(--white);
+  background-color: var(--lighten);
+}
+.AddAcquisitionForm select>* {
+  appearance: none;
+  background: transparent;
+  color: var(--black)
+}
+

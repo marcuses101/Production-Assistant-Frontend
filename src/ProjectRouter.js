@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Route, Switch, useRouteMatch } from "react-router-dom";
+import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
 import { EditProjectForm } from "./EditProjectForm";
 import { AddItemForm } from "./AddItemForm";
 import { EditItemForm } from "./EditItemForm";
 import { ProjectDashboard } from "./ProjectDashboard";
 import { AddSceneForm } from "./AddSceneForm";
 import EditSceneForm from "./EditSceneForm";
-import { ItemList } from "./ItemList";
+import {AddAcquisitionForm} from './AddAcquisitionForm'
 import { Sidenav } from "./Sidenav";
 import "./ProjectRouter.css";
 import { useProjectServices } from "./Hooks/useProjectServices";
@@ -14,6 +14,7 @@ import { useParamsProjectId } from "./Hooks/useParamsProjectId";
 import { ShoppingList } from "./ShoppingList";
 
 export function ProjectRouter() {
+  const {push} = useHistory()
   const { path } = useRouteMatch();
   const projectId = useParamsProjectId();
   const projectServices = useProjectServices();
@@ -22,8 +23,14 @@ export function ProjectRouter() {
   useEffect(() => {
     (async () => {
       console.log("getProject");
-      setProject(await projectServices.getProjectById(projectId));
+      try {
+        const project = await projectServices.getProjectById(projectId)
+        setProject(project);
+      } catch (error) {
+        push('/')
+      }
     })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId]);
 
   return (
@@ -33,6 +40,7 @@ export function ProjectRouter() {
         <h1>{project?.name}</h1>
         <Switch>
           <Route path={`${path}/scene/add`} component={AddSceneForm} />
+          <Route path={`${path}/acquisition/add`} component={AddAcquisitionForm}/>
           <Route
             path="/project/:projectId/scene/edit/:sceneId"
             component={EditSceneForm}
@@ -49,12 +57,13 @@ export function ProjectRouter() {
           </Route>
           <Route path="/project/:projectId/edit">
             <EditProjectForm
+              project={project}
               editProject={(project) =>
                 setProject((state) => ({ ...state, ...project }))
               }
             />
           </Route>
-          <Route path="/project/:projectId" component={ProjectDashboard}>
+          <Route path="/project/:projectId">
             <ProjectDashboard project={project} setProject={setProject} />
           </Route>
         </Switch>

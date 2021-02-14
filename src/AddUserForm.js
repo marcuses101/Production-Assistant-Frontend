@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { TextInput } from "./FormComponents/TextInput";
-import {PasswordInput} from './FormComponents/PasswordInput'
+import { PasswordInput } from "./FormComponents/PasswordInput";
 import { useFormValidation } from "./Hooks/useFormValidation";
+import { UserAPIServices } from "./API/UserAPIServices";
+import { useToast } from "./Hooks/useToast";
+import { MainContext } from "./MainContext";
+import { useLoginActions } from "./Hooks/useLoginActions";
 
 export function AddUserForm() {
+  const { userLogin } = useLoginActions();
+  const toast = useToast();
   const formValidation = useFormValidation();
   const { push } = useHistory();
   const [username, setUsername] = useState("");
@@ -16,7 +22,7 @@ export function AddUserForm() {
 
   const validationArray = [
     {
-      message:'username minimum 8 characters',
+      message: "username minimum 8 characters",
       setError: setUsernameError,
       validate() {
         return username.length >= 8;
@@ -24,7 +30,7 @@ export function AddUserForm() {
     },
     {
       setError: setPasswordError,
-      message:'Password minimum 8 characters and must match',
+      message: "Password minimum 8 characters and must match",
       validate() {
         return password === repeatPassword && password.length >= 8;
       },
@@ -37,9 +43,17 @@ export function AddUserForm() {
     },
   ];
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (!formValidation(validationArray)) return;
+    try {
+      const newUser = await UserAPIServices.addUser({ username, password });
+      toast.success(`new user ${username} created`);
+      await userLogin({ username, password });
+      push('/')
+    } catch (error) {
+      toast({ message: "server error", type: "error" });
+    }
   }
   function handleInputChange(e) {
     const setters = {
@@ -79,7 +93,7 @@ export function AddUserForm() {
           <button type="submit" onClick={handleSubmit}>
             Submit
           </button>
-          <button className="cancel" onClick={() => push("/")}>
+          <button type="button" className="cancel" onClick={() => push("/")}>
             Cancel
           </button>
         </div>

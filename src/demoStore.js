@@ -48,7 +48,24 @@ export const demoStore = {
       quantity: 5,
       acquired: true,
       actualCost: 25,
-      projectId: "1",
+    projectId: "1",
     },
+    {
+      id: '2',
+      name: 'Cardboard',
+      description: 'A big pile of cardboard',
+      lowEstimate: 5,
+      highEstimate: 10,
+      quantity: 5,
+      projectId: "1",
+    }
   ],
+  acquisitions: [
+    {
+      id: '1',
+      projectId: '1',
+      total: 50,
+      items: ['pizza']
+  }
+  ]
 };

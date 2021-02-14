@@ -1,28 +1,53 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { NumberInput } from "./FormComponents/NumberInput";
-import {TextArea} from "./FormComponents/TextArea";
+import { TextArea } from "./FormComponents/TextArea";
 import { TextInput } from "./FormComponents/TextInput";
+import { useFormValidation } from "./Hooks/useFormValidation";
 import { useParamsProjectId } from "./Hooks/useParamsProjectId";
 import { useProjectServices } from "./Hooks/useProjectServices";
+import { useToast } from "./Hooks/useToast";
 
-export function EditProjectForm({editProject}) {
+export function EditProjectForm({ project, editProject }) {
+  const formValidation = useFormValidation();
+  const { goBack } = useHistory();
+  const toast = useToast();
   const projectServices = useProjectServices();
   const projectId = useParamsProjectId();
-  const {push} = useHistory();
-  const [name, setName] = useState("");
+  const { push } = useHistory();
+  const [name, setName] = useState(project?.name || "");
   const [nameError, setNameError] = useState(false);
-  const [budget, setBudget] = useState('');
+  const [budget, setBudget] = useState(project?.budget || 0);
   const [budgetError, setBudgetError] = useState(false);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(project.description || "");
   const [descriptionError, setDescriptionError] = useState(false);
+
+  const validationArray = [
+    {
+      setError: setNameError,
+      validate: () => name,
+      message: "project name is required",
+    },
+    {
+      setError: setBudgetError,
+      validate: () => budget,
+      message: "project budget is required",
+    },
+    {
+      setError: setDescriptionError,
+      validate: () => description,
+      message: "project description is required",
+    },
+  ];
 
   async function onSubmit(e) {
     e.preventDefault();
-    const editedProject = {name,description,budget,id:projectId}
-    await projectServices.editProject(editedProject)
-    editProject(editedProject)
-    push(`/project/${projectId}`)
+    if (!formValidation(validationArray)) return;
+    const editedProject = { name, description, budget, id: projectId };
+    await projectServices.editProject(editedProject);
+    toast.success(`${name} updated`);
+    editProject(editedProject);
+    push(`/project/${projectId}`);
   }
   function onChange(e) {
     const setters = {
@@ -33,15 +58,6 @@ export function EditProjectForm({editProject}) {
     setters[e.target.id](e.target.value);
   }
 
-  useEffect(()=>{
-    (async ()=>{
-      const {name,description,budget} = await projectServices.getProjectById(projectId)
-      setName(name);
-      setDescription(description);
-      setBudget(budget);
-    })()
-  },[projectId])
-
   return (
     <section className="EditProjectForm">
       <form onSubmit={onSubmit}>
@@ -50,7 +66,7 @@ export function EditProjectForm({editProject}) {
           label="Name:"
           value={name}
           error={nameError}
-          id='name'
+          id="name"
           onChange={onChange}
         />
         <TextArea
@@ -63,13 +79,15 @@ export function EditProjectForm({editProject}) {
         <NumberInput
           label="Budget($)"
           value={budget}
-          id='budget'
-          error={descriptionError}
+          id="budget"
+          error={budgetError}
           onChange={onChange}
         />
         <div className="flex-center">
           <button type="submit">Submit Changes</button>
-          <button className="cancel">Cancel</button>
+          <button className="cancel" type="button" onClick={goBack}>
+            Cancel
+          </button>
         </div>
       </form>
     </section>
