@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export function SceneList({ projectId, scenes = [] }) {
-  console.table(scenes)
   const sceneItems = scenes?.map((scene) => (
     <li key={scene.id}>
       <Link to={`/project/${projectId}/scene/edit/${scene.id}`}>

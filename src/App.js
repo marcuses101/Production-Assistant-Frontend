@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer, useState, useEffect } from "react";
 import { MainContext } from "./MainContext";
 import { demoReducer } from "./demoReducer";
 import { demoStore } from "./demoStore";
@@ -18,9 +18,17 @@ function App() {
     setIsLoggedIn,
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      setIsDemo(false);
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   return (
     <MainContext.Provider value={contextValue}>
-        {isLoggedIn ? <AppRouter /> : <LoginRouter />}
+      {isLoggedIn ? <AppRouter /> : <LoginRouter />}
     </MainContext.Provider>
   );
 }

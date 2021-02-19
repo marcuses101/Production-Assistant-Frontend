@@ -10,8 +10,13 @@ export const ProjectAPIServices = {
         Authorization: `Bearer ${token}`,
       },
     });
-    const projects = await response.json();
-    return projects;
+    try {
+      const projects = await response.json();
+      if (!response.ok) throw projects?.error?.message
+      return projects;
+    } catch (error) {
+      return error
+    }
   },
   async getProjectById(projectId) {
     const token = localStorage.getItem("accessToken");

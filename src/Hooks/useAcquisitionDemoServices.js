@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { MainContext } from "../MainContext";
 import { DEMO_ACTIONS } from "../demoReducer";
-import {v4 as uuid} from 'uuid'
+import { v4 as uuid } from "uuid";
 
 export function useAcquisitionDemoServices() {
   const {
@@ -9,26 +9,32 @@ export function useAcquisitionDemoServices() {
     demoData: { acquisitions },
   } = useContext(MainContext);
   return {
-   async getProjectAcquisitions(projectId = '') {
+    async getProjectAcquisitions(projectId = "") {
       return acquisitions.filter(
         (entry) => entry?.projectId?.toString() === projectId.toString()
       );
     },
-  async addAcquisition({ total, items = [], location , projectId}) {
-      const newAcquisition = {total,items,location,id:uuid(),projectId}
+    async addAcquisition({ totalCost, items = [], location, projectId }) {
+      const newAcquisition = {
+        totalCost,
+        items,
+        location,
+        id: uuid(),
+        projectId,
+      };
       demoDispatch({
         type: DEMO_ACTIONS.ACQUISITION_ADD,
         payload: newAcquisition,
       });
-      return newAcquisition
+      return newAcquisition;
     },
-  async removeAcquisition(id) {
+    async removeAcquisition(id) {
       demoDispatch({ type: DEMO_ACTIONS.ACQUISITION_REMOVE, payload: id });
     },
-  async editAcquisition({ id, total, items, location }) {
+    async editAcquisition({ id, totalCost, items, location }) {
       demoDispatch({
         type: DEMO_ACTIONS.ACQUISITION_EDIT,
-        payload: { id, total, items, location },
+        payload: { id, totalCost, items, location },
       });
     },
   };

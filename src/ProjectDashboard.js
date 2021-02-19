@@ -7,7 +7,7 @@ import { SceneList } from "./SceneList";
 import "./ProjectDashboard.css";
 import { useAcquisitionServices } from "./Hooks/useAcquisitionServices";
 
-export function ProjectDashboard({ project, setProject }) {
+export function ProjectDashboard({ project = {}, setProject }) {
   const [scenes, setScenes] = useState([]);
   const sceneServices = useSceneServices();
   const [items, setItems] = useState([]);

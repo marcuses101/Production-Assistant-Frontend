@@ -13,14 +13,13 @@ export const DEMO_ACTIONS = {
   ITEM_EDIT: "ITEM_EDIT",
   ITEM_REMOVE: "ITEM_REMOVE",
 
-  ACQUISITION_ADD: 'ACQUISITION_ADD',
-  ACQUISITION_REMOVE: 'ACQUISITION_REMOVE',
-  ACQUISITION_EDIT: 'ACQUISITION EDIT'
+  ACQUISITION_ADD: "ACQUISITION_ADD",
+  ACQUISITION_REMOVE: "ACQUISITION_REMOVE",
+  ACQUISITION_EDIT: "ACQUISITION EDIT",
 };
 
 export function demoReducer(state, { type, payload }) {
   switch (type) {
-
     //Project actions
     case DEMO_ACTIONS.PROJECT_ADD: {
       const newProject = payload;
@@ -139,24 +138,30 @@ export function demoReducer(state, { type, payload }) {
     case DEMO_ACTIONS.ACQUISITION_ADD: {
       return {
         ...state,
-        acquisitions: [...state.acquisitions,payload]
-      }
+        acquisitions: [...state.acquisitions, payload],
+      };
     }
 
-    case DEMO_ACTIONS.ACQUISITION_REMOVE:{
-      const idToRemove = payload
+    case DEMO_ACTIONS.ACQUISITION_REMOVE: {
+      const idToRemove = payload;
       return {
         ...state,
-        acquisitions: state.acquisitions.filter(({id})=>id.toString()!==idToRemove.toString())
-      }
+        acquisitions: state.acquisitions.filter(
+          ({ id }) => id.toString() !== idToRemove.toString()
+        ),
+      };
     }
 
-    case DEMO_ACTIONS.ACQUISITION_EDIT:{
-      const {id} = payload
+    case DEMO_ACTIONS.ACQUISITION_EDIT: {
+      const { id } = payload;
       return {
         ...state,
-        acquisitions: state.acquisitions.map(acquisition=>acquisition.id.toString()===id.toString()?{...acquisition,...payload}:acquisition)
-      }
+        acquisitions: state.acquisitions.map((acquisition) =>
+          acquisition.id.toString() === id.toString()
+            ? { ...acquisition, ...payload }
+            : acquisition
+        ),
+      };
     }
     default:
       return state;

@@ -1,8 +1,8 @@
 import { Pie } from "react-chartjs-2";
 
 export function BudgetChart({ totalBudget, acquisitions = [] }) {
-  const amountSpent = acquisitions.reduce((amountSpent,{total})=>{
-    return amountSpent+total;
+  const amountSpent = acquisitions.reduce((amountSpent,{totalCost})=>{
+    return amountSpent+totalCost;
   },0)
   const data = {
     datasets: [

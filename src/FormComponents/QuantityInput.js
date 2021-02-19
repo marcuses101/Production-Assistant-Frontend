@@ -1,7 +1,7 @@
 import React from "react";
 import "./QuantityInput.css";
 
-export function QuantityInput({ value, label, id, setQuantity }) {
+export function QuantityInput({ value = 1, label, id, setQuantity }) {
   function onChange(e) {
     setQuantity(e.target.value);
   }

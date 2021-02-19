@@ -64,7 +64,7 @@ export const demoStore = {
     {
       id: '1',
       projectId: '1',
-      total: 50,
+      totalCost: 50,
       items: ['pizza']
   }
   ]

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { QuantityInput } from "./FormComponents/QuantityInput";
 import { NumberInput } from "./FormComponents/NumberInput";
 import { TextArea } from "./FormComponents/TextArea";
@@ -10,19 +10,21 @@ import { useHistory, useParams } from "react-router-dom";
 
 export function EditItemForm({ projectId }) {
   const toast = useToast();
-  const {itemId} = useParams();
-  const {push} = useHistory();
+  const { goBack } = useHistory();
+  const { itemId } = useParams();
+  const { push } = useHistory();
   const validateForm = useFormValidation();
   const itemServices = useItemServices();
 
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(false);
   const [lowEstimate, setLowEstimate] = useState(0);
+  const [lowEstimateError, setLowEstimateError] = useState(false);
   const [highEstimate, setHighEstimate] = useState(0);
+  const [highEstimateError, setHighEstimateError] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [description, setDescription] = useState("");
   const [descriptionError, setDescriptionError] = useState(false);
-  console.log(projectId);
   const validationArray = [
     {
       message: "Name is required",
@@ -34,46 +36,64 @@ export function EditItemForm({ projectId }) {
       setError: setDescriptionError,
       validate: () => description,
     },
+    {
+      message: "high estimate must be greater than or equal to low estimate",
+      setError: setHighEstimateError,
+      validate: () => parseInt(lowEstimate) <= parseInt(highEstimate),
+    },
+    {
+      setError: setLowEstimateError,
+      validate: () => parseInt(lowEstimate) <= parseInt(highEstimate),
+    },
   ];
 
-  function populateForm({name,description,lowEstimate,highEstimate,quantity}){
+  function populateForm({
+    name,
+    description,
+    lowEstimate,
+    highEstimate,
+    quantity,
+  }) {
     setName(name);
     setDescription(description);
     setLowEstimate(lowEstimate);
     setHighEstimate(highEstimate);
-    setQuantity(quantity)
+    setQuantity(quantity);
   }
 
-  useEffect(()=>{
-    (async ()=>{
-      populateForm(await itemServices.getItemById(itemId))
-    })()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  useEffect(() => {
+    (async () => {
+      populateForm(await itemServices.getItemById(itemId));
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function onSubmit(e) {
     e.preventDefault();
     if (!validateForm(validationArray)) return;
     try {
       await itemServices.editItem({
+        id: itemId,
         projectId,
         name,
         description,
         highEstimate,
         lowEstimate,
-        quantity
+        quantity,
       });
-      toast({message:`${name} updated`, type:'success'})
+      toast({ message: `${name} updated`, type: "success" });
+      goBack();
     } catch (error) {
-      toast({ message: "server error", type: 'error' });
+      console.log(error.message);
+      toast({ message: error.message, type: "error" });
     }
   }
   function onChange(e) {
     const setters = {
       name: setName,
       description: setDescription,
-      lowEstimate: (value)=>setLowEstimate(parseInt(value)),
-      highEstimate: (value)=>setHighEstimate(parseInt(value)),
+      lowEstimate: (value) => setLowEstimate(parseInt(value)),
+      highEstimate: (value) => setHighEstimate(parseInt(value)),
     };
     setters[e.target.id](e.target.value);
   }
@@ -114,17 +134,25 @@ export function EditItemForm({ projectId }) {
           label="Low item estimate ($)"
           value={lowEstimate}
           id="lowEstimate"
+          error={lowEstimateError}
           onChange={onChange}
         />
         <NumberInput
           label="High item estimate ($)"
           value={highEstimate}
           id="highEstimate"
+          error={highEstimateError}
           onChange={onChange}
         />
         <div className="flex-center">
           <button type="submit">Submit</button>
-          <button type='button' className="cancel" onClick={()=>push(`/project/${projectId}`)}>Cancel</button>
+          <button
+            type="button"
+            className="cancel"
+            onClick={() => push(`/project/${projectId}`)}
+          >
+            Cancel
+          </button>
         </div>
       </form>
     </section>
