@@ -10,7 +10,7 @@ export function ProjectList() {
     (async () => {
       setProjects(await projectServices.getProjects());
     })();
-  }, [projectServices]);
+  }, []);
 
   const projectLinks = projects.map((project) => (
     <li key={project.id}>
