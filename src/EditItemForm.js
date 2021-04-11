@@ -7,6 +7,7 @@ import { useFormValidation } from "./Hooks/useFormValidation";
 import { useItemServices } from "./Hooks/useItemServices";
 import { useToast } from "./Hooks/useToast";
 import { useHistory, useParams } from "react-router-dom";
+import { ItemAPIServices } from "./API/ItemAPIServices";
 
 export function EditItemForm({ projectId }) {
   const toast = useToast();
@@ -46,6 +47,15 @@ export function EditItemForm({ projectId }) {
       validate: () => parseInt(lowEstimate) <= parseInt(highEstimate),
     },
   ];
+
+ async function removeItem() {
+    try {
+      await ItemAPIServices.removeItem(itemId);
+      goBack();
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
 
   function populateForm({
     name,
@@ -152,6 +162,9 @@ export function EditItemForm({ projectId }) {
             onClick={() => push(`/project/${projectId}`)}
           >
             Cancel
+          </button>
+          <button type="button" onClick={removeItem}>
+            Remove Item
           </button>
         </div>
       </form>

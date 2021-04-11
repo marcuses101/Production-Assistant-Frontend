@@ -30,6 +30,7 @@ export function useItemDemoServices() {
       highEstimate,
       lowEstimate,
       quantity,
+      source
     }) {
       const item = {
         id: uuid(),
@@ -39,7 +40,7 @@ export function useItemDemoServices() {
         highEstimate,
         lowEstimate,
         quantity,
-        location: null,
+        source,
       };
       demoDispatch({ type: DEMO_ACTIONS.ITEM_ADD, payload: item });
       return item;

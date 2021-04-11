@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 
 export function AddItemForm({ projectId }) {
   const toast = useToast();
-  const {push} = useHistory();
+  const { push } = useHistory();
   const validateForm = useFormValidation();
   const itemServices = useItemServices();
   const [name, setName] = useState("");
@@ -20,6 +20,7 @@ export function AddItemForm({ projectId }) {
   const [quantity, setQuantity] = useState(1);
   const [description, setDescription] = useState("");
   const [descriptionError, setDescriptionError] = useState(false);
+  const [source, setSource] = useState("");
   const validationArray = [
     {
       message: "Name is required",
@@ -32,10 +33,10 @@ export function AddItemForm({ projectId }) {
       validate: () => description,
     },
   ];
-  function reset(){
-    setName('');
+  function reset() {
+    setName("");
     setQuantity(1);
-    setDescription('')
+    setDescription("");
     setLowEstimate(0);
     setHighEstimate(0);
   }
@@ -49,20 +50,22 @@ export function AddItemForm({ projectId }) {
         description,
         highEstimate,
         lowEstimate,
-        quantity
+        quantity,
+        source
       });
-      toast({message:`${name} added`, type:'success'})
+      toast({ message: `${name} added`, type: "success" });
       reset();
     } catch (error) {
-      toast({ message: "server error", type: 'error' });
+      toast({ message: "server error", type: "error" });
     }
   }
   function onChange(e) {
     const setters = {
       name: setName,
       description: setDescription,
-      lowEstimate: (value)=>setLowEstimate(parseInt(value)),
-      highEstimate: (value)=>setHighEstimate(parseInt(value)),
+      source: setSource,
+      lowEstimate: (value) => setLowEstimate(parseInt(value)),
+      highEstimate: (value) => setHighEstimate(parseInt(value)),
     };
     setters[e.target.id](e.target.value);
   }
@@ -99,6 +102,12 @@ export function AddItemForm({ projectId }) {
           error={descriptionError}
           onChange={onChange}
         />
+        <TextInput
+          label="Source:"
+          value={source}
+          id="source"
+          onChange={onChange}
+        />
         <NumberInput
           label="Low item estimate ($)"
           value={lowEstimate}
@@ -113,7 +122,13 @@ export function AddItemForm({ projectId }) {
         />
         <div className="flex-center">
           <button type="submit">Submit</button>
-          <button type='button' className="cancel" onClick={()=>push(`/project/${projectId}`)}>Cancel</button>
+          <button
+            type="button"
+            className="cancel"
+            onClick={() => push(`/project/${projectId}`)}
+          >
+            Cancel
+          </button>
         </div>
       </form>
     </section>

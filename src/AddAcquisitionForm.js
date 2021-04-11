@@ -22,7 +22,7 @@ export function AddAcquisitionForm() {
     .filter(
       ({ id }) =>
         !selectedItems.some((selected) => selected.id === id) &&
-        !acquisitions.some(({ items }) => items.includes(id))
+        !acquisitions.some(({ items }) => items?.includes(id))
     )
     .map((item) => {
       return (

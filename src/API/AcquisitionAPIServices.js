@@ -14,18 +14,19 @@ export const AcquisitionAPIServices = {
     );
     const acquisitions = await response.json();
     if (!response.ok) {
-      console.log(acquisitions)
+      throw new Error(acquisitions?.error?.message || "server error");
     }
     return acquisitions;
   },
-  async addAcquisition({ total, items = [], location }) {
+  async addAcquisition({ total, items = [], location, projectId }) {
     const token = localStorage.getItem("accessToken");
     const response = await fetch(`${SERVER}/acquisition`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
+        "Content-type":'application/json'
       },
-      body: JSON.stringify({ total, items, location }),
+      body: JSON.stringify({ total_cost:total, items, location, project_id:projectId}),
     });
     const acquisition = await response.json();
     return acquisition;
@@ -39,13 +40,13 @@ export const AcquisitionAPIServices = {
       },
     });
     if (!response.ok) {
-      throw "server error";
+      throw new Error("server error");
     }
   },
   async editAcquisition({ id, total, items, location }) {
     const token = localStorage.getItem("accessToken");
-    const response = await fetch(`${SERVER}/acquisition`, {
-      method: "POST",
+    const response = await fetch(`${SERVER}/acquisition/${id}`, {
+      method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
       },

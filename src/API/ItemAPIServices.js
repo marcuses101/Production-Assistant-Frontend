@@ -64,6 +64,7 @@ export const ItemAPIServices = {
     highEstimate,
     lowEstimate,
     quantity,
+    source,
   }) {
     const token = localStorage.getItem("accessToken");
     const response = await fetch(`${SERVER}/item`, {
@@ -79,6 +80,7 @@ export const ItemAPIServices = {
         high_estimate: highEstimate,
         low_estimate: lowEstimate,
         quantity,
+        source,
       }),
     });
     const data = response.json();
@@ -93,7 +95,7 @@ export const ItemAPIServices = {
     highEstimate,
     lowEstimate,
     location,
-    quantity
+    quantity,
   }) {
     const token = localStorage.getItem("accessToken");
     const response = await fetch(`${SERVER}/item/${id}`, {
@@ -108,7 +110,7 @@ export const ItemAPIServices = {
         high_estimate: highEstimate,
         low_estimate: lowEstimate,
         location,
-        quantity
+        quantity,
       }),
     });
     const data = await response.json();
@@ -116,12 +118,14 @@ export const ItemAPIServices = {
       throw new Error(data?.error?.message || "server error");
     }
   },
-  async removeItem() {
+  async removeItem(id) {
     const token = localStorage.getItem("accessToken");
-    const response = await fetch(`${SERVER}/item`, {
+    const response = await fetch(`${SERVER}/item/${id}`, {
+      method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+    if (!response.ok) throw new Error("server error");
   },
 };
