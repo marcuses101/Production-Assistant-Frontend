@@ -10,6 +10,10 @@
   padding: 0.5rem 1rem 1rem 1rem;
 }
 
+.open .Project {
+  filter:blur(2px) hue-rotate(15deg);
+}
+
 .Project > h1 {
   padding-bottom: 1rem;
 }

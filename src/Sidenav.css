@@ -1,19 +1,38 @@
 .Sidenav {
-  background-color: var(--lighten);
-  border-radius:0 var(--br) var(--br) 0;
+  background: linear-gradient(var(--lighten), var(--lighten)),
+  linear-gradient(-45deg, var(--background-purple), var(--background-green));
+  border-radius: 0 var(--br) var(--br) 0;
+  z-index:1;
 }
 
-.Sidenav ul{
-  display:flex;
+.Sidenav ul {
+  display: flex;
   flex-direction: column;
   align-content: center;
-  height:100%;
+  height: 100%;
   padding-top: 1rem;
-  padding-bottom:1rem;
+  padding-bottom: 1rem;
   margin-block-start: 0;
   margin-block-end: 0;
 }
 
-.Sidenav ul li:last-child{
-  margin-top:auto;
+.Sidenav ul li:last-child {
+  margin-top: auto;
+}
+
+@media screen and (max-width: 1000px) {
+  .Sidenav {
+    position: fixed;
+    height: 100vh;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+    transition: transform 200ms ease;
+  }
+
+  .open .Sidenav {
+    transform: translateX(-0%);
+  }
+  .closed .Sidenav {
+    transform: translateX(-100%);
+  }
+
 }

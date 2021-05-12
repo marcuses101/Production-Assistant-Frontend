@@ -12,6 +12,7 @@ import "./ProjectRouter.css";
 import { useProjectServices } from "./Hooks/useProjectServices";
 import { useParamsProjectId } from "./Hooks/useParamsProjectId";
 import { ShoppingList } from "./ShoppingList";
+import { NavButton } from './NavButton'
 
 export function ProjectRouter() {
   const {push} = useHistory()
@@ -33,8 +34,18 @@ export function ProjectRouter() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId]);
 
+  function handleNav(e){
+   const sidenav = e.target.closest('.Sidenav');
+   const root = document.getElementById('root');
+   if (sidenav && !['A', 'BUTTON'].includes(e.target.tagName)) {
+    return root.classList.replace("closed",'open');
+   }
+    return root.classList.replace('open', 'closed');
+  }
+
   return (
-    <div className="ProjectRouter">
+    <div className="ProjectRouter" onClick={handleNav}>
+      <NavButton/>
       <Sidenav />
       <main className="Project">
         <h1>{project?.name}</h1>

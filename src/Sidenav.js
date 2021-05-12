@@ -7,8 +7,22 @@ export function Sidenav() {
   const { push } = useHistory();
   const loginActions = useLoginActions();
   const projectId = useParamsProjectId();
+  function closeNav(){
+    const root = document.getElementById('root');
+    root.classList.replace('open','closed');
+  }
+  function openNav(){
+    const root = document.getElementById('root');
+    root.classList.replace('closed','open');
+  }
+  function handleClick(e){
+    if (['A','BUTTON'].includes(e.target.tagName)) {
+     return closeNav();
+    }
+  }
+
   return (
-    <nav className="Sidenav">
+    <nav className="Sidenav" onClick={handleClick}>
       <ul>
         <li>
           <Link to={`/project/${projectId}`}>Overview</Link>
