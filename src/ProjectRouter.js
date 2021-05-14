@@ -37,6 +37,9 @@ export function ProjectRouter() {
   function handleNav(e){
    const sidenav = e.target.closest('.Sidenav');
    const root = document.getElementById('root');
+   if (!sidenav && root.classList.contains('open')){
+    e.stopPropagation()
+   }
    if (sidenav && !['A', 'BUTTON'].includes(e.target.tagName)) {
     return root.classList.replace("closed",'open');
    }

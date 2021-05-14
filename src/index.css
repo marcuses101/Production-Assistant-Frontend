@@ -99,6 +99,7 @@ a {
 button,
 a {
   padding: 0.5rem;
+  margin: 0 0.25rem;
   font-size: 1.2rem;
   font-weight: 600;
   border-radius: 5px;

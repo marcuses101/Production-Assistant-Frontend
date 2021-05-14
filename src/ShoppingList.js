@@ -1,5 +1,4 @@
 import { useState, useEffect, Fragment } from "react";
-import { useItemAcquisitionServices } from "./Hooks/useItemAcquisitionServices";
 import { useItemServices } from "./Hooks/useItemServices";
 import { useParamsProjectId } from "./Hooks/useParamsProjectId";
 import { useToast } from "./Hooks/useToast";
@@ -9,7 +8,6 @@ export function ShoppingList() {
   const toast = useToast();
   const [itemAcquisitions, setItemAcquisitions] = useState([]);
   const projectId = useParamsProjectId();
-  const ItemAcquisitionServices = useItemAcquisitionServices();
   const ItemServices = useItemServices();
   const [items, setItems] = useState([]);
 
@@ -33,12 +31,10 @@ export function ShoppingList() {
   useEffect(() => {
     (async () => {
       try {
-        const [items, itemAcquisitions] = await Promise.all([
+        const [items] = await Promise.all([
           ItemServices.getProjectItems(projectId),
-          ItemAcquisitionServices.getProjectEntries(projectId),
         ]);
         setItems(items);
-        setItemAcquisitions(itemAcquisitions);
       } catch (error) {
         toast.error(error.message);
       }
