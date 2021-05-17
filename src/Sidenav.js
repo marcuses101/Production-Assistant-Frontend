@@ -34,7 +34,7 @@ export function Sidenav() {
           <Link to={`/project/${projectId}/item/add`}>Add Item</Link>
         </li>
         <li>
-          <Link to={`/project/${projectId}/item`}>ShoppingList</Link>
+          <Link to={`/project/${projectId}/item`}>Shopping List</Link>
         </li>
         <li>
           <Link to={`/project/${projectId}/acquisition/add`}>

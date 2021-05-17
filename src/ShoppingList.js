@@ -27,7 +27,6 @@ export function ShoppingList() {
     )
   );
 
-  console.log(unacquiredItems);
   useEffect(() => {
     (async () => {
       try {

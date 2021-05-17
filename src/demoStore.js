@@ -48,7 +48,8 @@ export const demoStore = {
       quantity: 5,
       acquired: true,
       actualCost: 25,
-    projectId: "1",
+      projectId: "1",
+      acquisitionId: '1',
     },
     {
       id: '2',
@@ -58,6 +59,8 @@ export const demoStore = {
       highEstimate: 10,
       quantity: 5,
       projectId: "1",
+      acquired:false,
+      acquisitionId: null
     }
   ],
   acquisitions: [

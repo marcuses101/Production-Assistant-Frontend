@@ -1,10 +1,10 @@
 .ProjectDashboard{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
   gap: 1rem;
 }
 
-@media screen and (max-width: 600px) {
+ @media screen and (max-width: 500px) {
   .ProjectDashboard{
     grid-template-columns: 1fr;
 
