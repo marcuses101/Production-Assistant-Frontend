@@ -16,13 +16,11 @@ export function ShoppingList() {
     ({ id }) => !acquiredItemIds.includes(id)
   );
   const listItems = unacquiredItems.map(
-    ({ name, source, highEstimate, lowEstimate, id, quantity }) => (
+    ({ name, source, id, quantity }) => (
       <Fragment key={id}>
         <span>{name}</span>
         <span>{quantity}</span>
         <span>{source ?? ''}</span>
-        <span>{lowEstimate}</span>
-        <span>{highEstimate}</span>
       </Fragment>
     )
   );
@@ -46,8 +44,6 @@ export function ShoppingList() {
         <h3>Item Name</h3>
         <h3>Quantity</h3>
         <h3>Source</h3>
-        <h3>Low Est($)</h3>
-        <h3>High Est($)</h3>
         {listItems}
       </div>
     </section>

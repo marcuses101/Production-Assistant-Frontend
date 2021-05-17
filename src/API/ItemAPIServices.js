@@ -61,8 +61,6 @@ export const ItemAPIServices = {
     projectId,
     name,
     description,
-    highEstimate,
-    lowEstimate,
     quantity,
     source,
   }) {
@@ -77,8 +75,6 @@ export const ItemAPIServices = {
         project_id: projectId,
         name,
         description,
-        high_estimate: highEstimate,
-        low_estimate: lowEstimate,
         quantity,
         source,
       }),
@@ -92,8 +88,6 @@ export const ItemAPIServices = {
     id,
     name,
     description,
-    highEstimate,
-    lowEstimate,
     location,
     quantity,
   }) {
@@ -107,8 +101,6 @@ export const ItemAPIServices = {
       body: JSON.stringify({
         name,
         description,
-        high_estimate: highEstimate,
-        low_estimate: lowEstimate,
         location,
         quantity,
       }),

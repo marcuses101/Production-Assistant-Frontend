@@ -19,10 +19,6 @@ export function EditItemForm({ projectId }) {
 
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(false);
-  const [lowEstimate, setLowEstimate] = useState(0);
-  const [lowEstimateError, setLowEstimateError] = useState(false);
-  const [highEstimate, setHighEstimate] = useState(0);
-  const [highEstimateError, setHighEstimateError] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [description, setDescription] = useState("");
   const [descriptionError, setDescriptionError] = useState(false);
@@ -36,15 +32,6 @@ export function EditItemForm({ projectId }) {
       message: "Description is required",
       setError: setDescriptionError,
       validate: () => description,
-    },
-    {
-      message: "high estimate must be greater than or equal to low estimate",
-      setError: setHighEstimateError,
-      validate: () => parseInt(lowEstimate) <= parseInt(highEstimate),
-    },
-    {
-      setError: setLowEstimateError,
-      validate: () => parseInt(lowEstimate) <= parseInt(highEstimate),
     },
   ];
 
@@ -60,14 +47,10 @@ export function EditItemForm({ projectId }) {
   function populateForm({
     name,
     description,
-    lowEstimate,
-    highEstimate,
     quantity,
   }) {
     setName(name);
     setDescription(description);
-    setLowEstimate(lowEstimate);
-    setHighEstimate(highEstimate);
     setQuantity(quantity);
   }
 
@@ -87,8 +70,6 @@ export function EditItemForm({ projectId }) {
         projectId,
         name,
         description,
-        highEstimate,
-        lowEstimate,
         quantity,
       });
       toast({ message: `${name} updated`, type: "success" });
@@ -102,8 +83,6 @@ export function EditItemForm({ projectId }) {
     const setters = {
       name: setName,
       description: setDescription,
-      lowEstimate: (value) => setLowEstimate(parseInt(value)),
-      highEstimate: (value) => setHighEstimate(parseInt(value)),
     };
     setters[e.target.id](e.target.value);
   }
@@ -138,20 +117,6 @@ export function EditItemForm({ projectId }) {
           value={description}
           id="description"
           error={descriptionError}
-          onChange={onChange}
-        />
-        <NumberInput
-          label="Low item estimate ($)"
-          value={lowEstimate}
-          id="lowEstimate"
-          error={lowEstimateError}
-          onChange={onChange}
-        />
-        <NumberInput
-          label="High item estimate ($)"
-          value={highEstimate}
-          id="highEstimate"
-          error={highEstimateError}
           onChange={onChange}
         />
         <div className="flex-center">

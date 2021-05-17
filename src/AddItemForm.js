@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { QuantityInput } from "./FormComponents/QuantityInput";
-import { NumberInput } from "./FormComponents/NumberInput";
 import { TextArea } from "./FormComponents/TextArea";
 import { TextInput } from "./FormComponents/TextInput";
 import { useFormValidation } from "./Hooks/useFormValidation";
@@ -15,8 +14,6 @@ export function AddItemForm({ projectId }) {
   const itemServices = useItemServices();
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(false);
-  const [lowEstimate, setLowEstimate] = useState(0);
-  const [highEstimate, setHighEstimate] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [description, setDescription] = useState("");
   const [descriptionError, setDescriptionError] = useState(false);
@@ -37,8 +34,6 @@ export function AddItemForm({ projectId }) {
     setName("");
     setQuantity(1);
     setDescription("");
-    setLowEstimate(0);
-    setHighEstimate(0);
   }
   async function onSubmit(e) {
     e.preventDefault();
@@ -48,8 +43,6 @@ export function AddItemForm({ projectId }) {
         projectId,
         name,
         description,
-        highEstimate,
-        lowEstimate,
         quantity,
         source
       });
@@ -64,8 +57,6 @@ export function AddItemForm({ projectId }) {
       name: setName,
       description: setDescription,
       source: setSource,
-      lowEstimate: (value) => setLowEstimate(parseInt(value)),
-      highEstimate: (value) => setHighEstimate(parseInt(value)),
     };
     setters[e.target.id](e.target.value);
   }
@@ -106,18 +97,6 @@ export function AddItemForm({ projectId }) {
           label="Source:"
           value={source}
           id="source"
-          onChange={onChange}
-        />
-        <NumberInput
-          label="Low item estimate ($)"
-          value={lowEstimate}
-          id="lowEstimate"
-          onChange={onChange}
-        />
-        <NumberInput
-          label="High item estimate ($)"
-          value={highEstimate}
-          id="highEstimate"
           onChange={onChange}
         />
         <div className="flex-center">

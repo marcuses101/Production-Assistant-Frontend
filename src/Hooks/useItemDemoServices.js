@@ -27,8 +27,6 @@ export function useItemDemoServices() {
       projectId,
       name,
       description,
-      highEstimate,
-      lowEstimate,
       quantity,
       source
     }) {
@@ -37,8 +35,6 @@ export function useItemDemoServices() {
         projectId,
         name,
         description,
-        highEstimate,
-        lowEstimate,
         quantity,
         source,
       };
@@ -51,8 +47,6 @@ export function useItemDemoServices() {
       id,
       name,
       description,
-      highEstimate,
-      lowEstimate,
       location,
     }) {
       demoDispatch({
@@ -62,8 +56,6 @@ export function useItemDemoServices() {
           id,
           name,
           description,
-          lowEstimate,
-          highEstimate,
           location,
         },
       });
