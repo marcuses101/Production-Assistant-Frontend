@@ -36,9 +36,12 @@ export default function EditSceneForm() {
           itemServices.getProjectItems(projectId),
           itemServices.getSceneItems(sceneId),
         ]);
+        const sceneItemIds = dbSceneItems.map(({id})=>id);
+        console.log({dbItems})
+        console.log({dbSceneItems})
         // add checked=true if item appears in scene;
         const items = dbItems.map((item) =>
-          dbSceneItems.some(({ id: sceneItemId }) => item.id === sceneItemId)
+          (sceneItemIds.includes(item.id))
             ? { ...item, checked: true, sceneItem: true }
             : {...item}
         );

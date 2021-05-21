@@ -37,19 +37,18 @@ export function AddSceneForm() {
   ];
   useEffect(() => {
     (async () => {
-      const items = await itemServices.getProjectItems(projectId);
+      const dbItems = await itemServices.getProjectItems(projectId);
+      // copy items to avoid weirdness
+      const items = dbItems.map((item) => {
+        return { ...item };
+      });
       setItems(items);
-      console.log(items);
     })();
   }, [projectId]);
 
   async function onSubmit(e) {
     e.preventDefault();
     console.log({ items });
-    const checkedIds = items.reduce(
-      (arr, { checked, id }) => (checked ? [...arr, id] : arr),
-      []
-    );
     if (!formValidation(validationArray)) return;
     try {
       const { id: sceneId } = await sceneServices.addScene({
@@ -58,12 +57,15 @@ export function AddSceneForm() {
         description,
         date,
       });
-      console.log({ sceneId });
       await Promise.all(
-        checkedIds.map(
-          async (itemId) =>
-            await sceneServices.addItemToScene({ itemId, sceneId })
-        )
+        items.reduce((promiseArray, item) => {
+          if (item.checked) {
+            promiseArray.push(
+              sceneServices.addItemToScene({ itemId: item.id, sceneId })
+            );
+          }
+          return promiseArray;
+        }, [])
       );
       toast.success(`${name} scene added!`);
       goBack();
@@ -81,14 +83,19 @@ export function AddSceneForm() {
   }
 
   function handleCheck(e) {
-    const {checked, dataset:{id}} = e.target;
-    const itemId = parseInt(id)
-    setItems(items=>items.map(item=>{
-      if (parseInt(item.id) === parseInt(itemId)) {
-        item.checked = checked;
-      }
-      return item;
-    }))
+    const {
+      checked,
+      dataset: { id },
+    } = e.target;
+    const itemId = parseInt(id);
+    setItems((items) =>
+      items.map((item) => {
+        if (parseInt(item.id) === parseInt(itemId)) {
+          item.checked = checked;
+        }
+        return item;
+      })
+    );
   }
   return (
     <section className="AddSceneForm">

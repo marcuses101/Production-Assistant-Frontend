@@ -44,7 +44,6 @@ export function AddItemForm({ projectId }) {
         name,
         description,
         quantity,
-        source
       });
       toast({ message: `${name} added`, type: "success" });
       reset();
@@ -91,12 +90,6 @@ export function AddItemForm({ projectId }) {
           value={description}
           id="description"
           error={descriptionError}
-          onChange={onChange}
-        />
-        <TextInput
-          label="Source:"
-          value={source}
-          id="source"
           onChange={onChange}
         />
         <div className="flex-center">
