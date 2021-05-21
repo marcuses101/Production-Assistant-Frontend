@@ -1,11 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { TextInput } from "./FormComponents/TextInput";
 import { PasswordInput } from "./FormComponents/PasswordInput";
 import { useFormValidation } from "./Hooks/useFormValidation";
 import { UserAPIServices } from "./API/UserAPIServices";
 import { useToast } from "./Hooks/useToast";
-import { MainContext } from "./MainContext";
 import { useLoginActions } from "./Hooks/useLoginActions";
 
 export function AddUserForm() {

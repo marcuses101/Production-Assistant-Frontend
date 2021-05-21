@@ -1,5 +1,17 @@
 {
   "cSpell.words": [
     "chartjs"
+  ],
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "film server",
+      "database": "film",
+      "username": "marcus",
+      "password": ""
+    }
   ]
 }

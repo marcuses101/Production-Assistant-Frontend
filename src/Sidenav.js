@@ -11,10 +11,6 @@ export function Sidenav() {
     const root = document.getElementById('root');
     root.classList.replace('open','closed');
   }
-  function openNav(){
-    const root = document.getElementById('root');
-    root.classList.replace('closed','open');
-  }
   function handleClick(e){
     if (['A','BUTTON'].includes(e.target.tagName)) {
      return closeNav();
@@ -35,11 +31,6 @@ export function Sidenav() {
         </li>
         <li>
           <Link to={`/project/${projectId}/item`}>Shopping List</Link>
-        </li>
-        <li>
-          <Link to={`/project/${projectId}/acquisition/add`}>
-            Add Acquisition
-          </Link>
         </li>
         <li>
           <Link to={`/project/${projectId}/edit`}>Edit Project</Link>

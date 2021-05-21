@@ -2,35 +2,48 @@ import { useState, useEffect, Fragment } from "react";
 import { useItemServices } from "./Hooks/useItemServices";
 import { useParamsProjectId } from "./Hooks/useParamsProjectId";
 import { useToast } from "./Hooks/useToast";
+import { AddAcquisitionForm } from "./AddAcquisitionForm";
 import "./ShoppingList.css";
 
 export function ShoppingList() {
   const toast = useToast();
-  const [itemAcquisitions, setItemAcquisitions] = useState([]);
   const projectId = useParamsProjectId();
   const ItemServices = useItemServices();
   const [items, setItems] = useState([]);
+  const [checkedItemIds, setCheckedItemIds] = useState([]);
 
-  const acquiredItemIds = itemAcquisitions.map(({ item_id }) => item_id);
-  const unacquiredItems = items.filter(
-    ({ id }) => !acquiredItemIds.includes(id)
-  );
-  const listItems = unacquiredItems.map(
-    ({ name, source, id, quantity }) => (
+  function handleCheck(e) {
+    const itemId = e.target.dataset.id;
+    setCheckedItemIds((arr) => {
+      return arr.includes(itemId)
+        ? arr.filter((id) => id !== itemId)
+        : [...arr, itemId];
+    });
+  }
+  const listItems = items.map(({ name, id, quantity, acquired }) => {
+    const itemChecked = checkedItemIds.includes(id);
+    return (
       <Fragment key={id}>
+        <span>
+          <input
+            type="checkbox"
+            checked={itemChecked}
+            disabled={acquired}
+            data-id={id}
+            onChange={handleCheck}
+          />
+        </span>
         <span>{name}</span>
         <span>{quantity}</span>
-        <span>{source ?? ''}</span>
+        <span>{acquired ? "Yes" : "No"}</span>
       </Fragment>
-    )
-  );
+    );
+  });
 
   useEffect(() => {
     (async () => {
       try {
-        const [items] = await Promise.all([
-          ItemServices.getProjectItems(projectId),
-        ]);
+        const items = await ItemServices.getProjectItems(projectId);
         setItems(items);
       } catch (error) {
         toast.error(error.message);
@@ -38,14 +51,24 @@ export function ShoppingList() {
     })();
   }, [projectId]);
   return (
-    <section className="ShoppingList">
-      <h2>Shopping list</h2>
-      <div className="grid">
-        <h3>Item Name</h3>
-        <h3>Quantity</h3>
-        <h3>Source</h3>
-        {listItems}
-      </div>
-    </section>
+    <>
+      <section className="ShoppingList">
+        <h2>Shopping list</h2>
+        <div className="grid">
+          <h3>Select</h3>
+          <h3>Item Name</h3>
+          <h3>Quantity</h3>
+          <h3>Acquired</h3>
+          {listItems}
+        </div>
+        {checkedItemIds.length > 0 && (
+          <AddAcquisitionForm
+            setCheckedItemIds={setCheckedItemIds}
+            setItems={setItems}
+            checkedItemIds={checkedItemIds}
+          />
+        )}
+      </section>
+    </>
   );
 }

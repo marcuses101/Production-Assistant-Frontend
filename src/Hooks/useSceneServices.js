@@ -1,8 +1,8 @@
 import { config } from "../config";
 import { useContext } from "react";
-import { v4 as uuid } from "uuid";
 import { DEMO_ACTIONS } from "../demoReducer";
 import { MainContext } from "../MainContext";
+import { randomIntId } from "../utils";
 const { SERVER } = config;
 
 export function useSceneServices() {
@@ -15,7 +15,8 @@ export function useSceneServices() {
   return {
     async getProjectScenes(projectId) {
       if (isDemo) {
-        return scenes.filter((scene) => scene.projectId === projectId);
+        console.log(projectId)
+        return scenes.filter((scene) => parseInt(scene.projectId) === parseInt(projectId));
       }
 
       const token = localStorage.getItem("accessToken");
@@ -45,9 +46,9 @@ export function useSceneServices() {
       return APIScene;
     },
 
-    async addScene({ projectId, name, description, shootDate }) {
+    async addScene({ projectId, name, description, date }) {
       if (isDemo) {
-        const scene = { projectId, name, description, id: uuid(), items: [] };
+        const scene = { projectId, name, description, id: randomIntId()};
         demoDispatch({ type: DEMO_ACTIONS.SCENE_ADD, payload: scene });
         return scene;
       }
@@ -63,16 +64,16 @@ export function useSceneServices() {
           project_id: projectId,
           name,
           description,
-          shoot_date: shootDate,
+          date: date,
         }),
       });
       const scene = await response.json();
       return scene;
     },
 
-    async editScene({ name, description, id, shootDate }) {
+    async editScene({ name, description, id, date }) {
       if (isDemo) {
-        const scene = { name, description, id };
+        const scene = { name, description, id, date };
         demoDispatch({ type: DEMO_ACTIONS.SCENE_EDIT, payload: scene });
         return scene;
       }
@@ -84,7 +85,7 @@ export function useSceneServices() {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, description, shootDate }),
+        body: JSON.stringify({ name, description, date }),
       });
 
       const scene = await response.json();
@@ -111,6 +112,7 @@ export function useSceneServices() {
 
     async addItemToScene({ itemId, sceneId }) {
       if (isDemo) {
+        console.log('addItemToScene',{itemId,sceneId})
         demoDispatch({
           type: DEMO_ACTIONS.SCENE_ADD_ITEM,
           payload: { itemId, sceneId },

@@ -1,3 +1,4 @@
+import {removeUndefined} from './utils'
 export const DEMO_ACTIONS = {
   PROJECT_ADD: "PROJECT_ADD",
   PROJECT_EDIT: "PROJECT_EDIT",
@@ -79,11 +80,7 @@ export function demoReducer(state, { type, payload }) {
       const { itemId, sceneId } = payload;
       return {
         ...state,
-        scenes: state.scenes.map((scene) =>
-          scene.id.toString() === sceneId.toString()
-            ? { ...scene, items: [...scene.items, itemId] }
-            : scene
-        ),
+        sceneItem: [...state.sceneItem,{itemId,sceneId}]
       };
     }
 
@@ -91,11 +88,7 @@ export function demoReducer(state, { type, payload }) {
       const { itemId, sceneId } = payload;
       return {
         ...state,
-        scenes: state.scenes.map((scene) =>
-          scene.id.toString() === sceneId.toString()
-            ? { ...scene, items: scene.items.filter((id) => id === itemId) }
-            : scene
-        ),
+        sceneItem: state.sceneItem.filter(entry=>(entry.itemId !== itemId || entry.sceneId !== sceneId))
       };
     }
     //item actions
@@ -108,12 +101,12 @@ export function demoReducer(state, { type, payload }) {
     }
 
     case DEMO_ACTIONS.ITEM_EDIT: {
-      const itemToUpdate = payload;
+      const itemToUpdate = removeUndefined(payload)
       const { id } = itemToUpdate;
       return {
         ...state,
         items: state.items.map((item) =>
-          item.id.toString() === id.toString() ? itemToUpdate : item
+          item.id.toString() === id.toString() ? {...item,...itemToUpdate} : item
         ),
       };
     }

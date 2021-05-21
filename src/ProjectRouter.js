@@ -25,7 +25,7 @@ export function ProjectRouter() {
     (async () => {
       console.log("getProject");
       try {
-        const project = await projectServices.getProjectById(projectId)
+        const project = await projectServices.getProjectById(parseInt(projectId))
         setProject(project);
       } catch (error) {
         push('/')

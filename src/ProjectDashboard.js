@@ -17,12 +17,14 @@ export function ProjectDashboard({ project = {}, setProject }) {
 
   useEffect(() => {
     (async () => {
+      console.log(project.id)
       if (project.id) {
         const [scenes, items, acquisitions] = await Promise.all([
           sceneServices.getProjectScenes(project.id),
           itemServices.getProjectItems(project.id),
           acquisitionServices.getProjectAcquisitions(project.id),
         ]);
+        console.log({scenes,items,acquisitions});
         setScenes(scenes);
         setItems(items);
         setAcquisitions(acquisitions);

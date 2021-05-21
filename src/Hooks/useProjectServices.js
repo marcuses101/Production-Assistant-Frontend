@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { MainContext } from "../MainContext";
 import { config } from "../config";
-import { v4 as uuid } from "uuid";
 import { DEMO_ACTIONS } from "../demoReducer";
+import {randomIntId} from '../utils'
 const { SERVER } = config;
 
 export function useProjectServices() {
@@ -48,7 +48,7 @@ export function useProjectServices() {
     async addProject({ name, description, budget }) {
 
       if (isDemo) {
-        const project = { name, description, budget, id: uuid() };
+        const project = { name, description, budget, id: randomIntId() };
         demoDispatch({ type: DEMO_ACTIONS.PROJECT_ADD, payload: project });
         return project;
       }
@@ -91,7 +91,7 @@ export function useProjectServices() {
 
     },
     async removeProject(id) {
-      
+
       if (isDemo) {
         demoDispatch({ type: DEMO_ACTIONS.PROJECT_REMOVE, payload: id });
         return;
