@@ -115,14 +115,8 @@ export function demoReducer(state, { type, payload }) {
       const id = payload;
       return {
         ...state,
-        scenes: state.scenes.map((scene) => ({
-          ...scene,
-          items: scene.items.filter(
-            (item) => item.id.toString() !== id.toString()
-          ),
-        })),
         items: state.items.filter(
-          (item) => item.id.toString() === id.toString()
+          (item) => parseInt(item.id) !== parseInt(id)
         ),
       };
     }

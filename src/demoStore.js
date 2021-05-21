@@ -74,7 +74,7 @@ export const demoStore = {
     {
       id: 1,
       projectId: 1,
-      totalCost: 50,
+      total: 50,
     },
   ],
 };

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { QuantityInput } from "./FormComponents/QuantityInput";
-import { NumberInput } from "./FormComponents/NumberInput";
 import { TextArea } from "./FormComponents/TextArea";
 import { TextInput } from "./FormComponents/TextInput";
 import { useFormValidation } from "./Hooks/useFormValidation";
 import { useItemServices } from "./Hooks/useItemServices";
 import { useToast } from "./Hooks/useToast";
 import { useHistory, useParams } from "react-router-dom";
-import { ItemAPIServices } from "./API/ItemAPIServices";
 
 export function EditItemForm({ projectId }) {
   const toast = useToast();
@@ -37,7 +35,7 @@ export function EditItemForm({ projectId }) {
 
  async function removeItem() {
     try {
-      await ItemAPIServices.removeItem(itemId);
+      await itemServices.removeItem(itemId)
       goBack();
     } catch (error) {
       toast.error(error.message);

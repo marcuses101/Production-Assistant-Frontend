@@ -13,11 +13,12 @@ export function ShoppingList() {
   const [checkedItemIds, setCheckedItemIds] = useState([]);
 
   function handleCheck(e) {
-    const itemId = e.target.dataset.id;
+    const {id} = e.target.dataset;
+    const itemId = parseInt(id);
     setCheckedItemIds((arr) => {
       return arr.includes(itemId)
         ? arr.filter((id) => id !== itemId)
-        : [...arr, itemId];
+        : [...arr, parseInt(itemId)];
     });
   }
   const listItems = items.map(({ name, id, quantity, acquired }) => {
