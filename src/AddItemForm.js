@@ -17,7 +17,6 @@ export function AddItemForm({ projectId }) {
   const [quantity, setQuantity] = useState(1);
   const [description, setDescription] = useState("");
   const [descriptionError, setDescriptionError] = useState(false);
-  const [source, setSource] = useState("");
   const validationArray = [
     {
       message: "Name is required",
@@ -55,7 +54,6 @@ export function AddItemForm({ projectId }) {
     const setters = {
       name: setName,
       description: setDescription,
-      source: setSource,
     };
     setters[e.target.id](e.target.value);
   }
@@ -66,9 +64,8 @@ export function AddItemForm({ projectId }) {
         <div
           style={{
             display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "center",
-            marginTop: "2rem",
+            alignItems: "center",
+            justifyContent:'center'
           }}
         >
           <TextInput
@@ -99,7 +96,7 @@ export function AddItemForm({ projectId }) {
             className="cancel"
             onClick={() => push(`/project/${projectId}`)}
           >
-            Cancel
+            Back
           </button>
         </div>
       </form>

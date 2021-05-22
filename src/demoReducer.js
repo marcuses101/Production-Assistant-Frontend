@@ -73,6 +73,7 @@ export function demoReducer(state, { type, payload }) {
         scenes: state.scenes.filter(
           (scene) => scene.id.toString() !== id.toString()
         ),
+        sceneItem: state.sceneItem.filter(({sceneId})=>parseInt(sceneId)!==id)
       };
     }
 
@@ -118,6 +119,7 @@ export function demoReducer(state, { type, payload }) {
         items: state.items.filter(
           (item) => parseInt(item.id) !== parseInt(id)
         ),
+        sceneItem: state.sceneItem.filter(({itemId})=>parseInt(itemId)!==parseInt(id))
       };
     }
 

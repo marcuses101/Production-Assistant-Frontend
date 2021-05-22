@@ -1,11 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { TextInput } from "./FormComponents/TextInput";
 import { PasswordInput } from "./FormComponents/PasswordInput";
 import { useFormValidation } from "./Hooks/useFormValidation";
-import { UserAPIServices } from "./API/UserAPIServices";
 import { useToast } from "./Hooks/useToast";
-import { MainContext } from "./MainContext";
 import { useLoginActions } from "./Hooks/useLoginActions";
 
 export function LoginForm() {
@@ -42,7 +40,7 @@ export function LoginForm() {
       await userLogin({username,password})
       push('/')
     } catch (error) {
-      console.log(error)
+      console.error(error)
       toast({ message: error, type: "error" });
     }
   }
@@ -55,7 +53,8 @@ export function LoginForm() {
   }
 
   return (
-    <section className="AddUserForm">
+    <main style={{margin:'1rem'}}>
+    <section className="UserLoginForm">
       <form onSubmit={handleSubmit}>
         <h2>User Login</h2>
         <TextInput
@@ -82,5 +81,7 @@ export function LoginForm() {
         </div>
       </form>
     </section>
+
+    </main>
   );
 }

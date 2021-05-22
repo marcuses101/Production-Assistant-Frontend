@@ -15,7 +15,6 @@ export function useSceneServices() {
   return {
     async getProjectScenes(projectId) {
       if (isDemo) {
-        console.log(projectId)
         return scenes.filter((scene) => parseInt(scene.projectId) === parseInt(projectId));
       }
 
@@ -48,7 +47,7 @@ export function useSceneServices() {
 
     async addScene({ projectId, name, description, date }) {
       if (isDemo) {
-        const scene = { projectId, name, description, id: randomIntId()};
+        const scene = { projectId, name, description, id: randomIntId(), date};
         demoDispatch({ type: DEMO_ACTIONS.SCENE_ADD, payload: scene });
         return scene;
       }
@@ -112,7 +111,6 @@ export function useSceneServices() {
 
     async addItemToScene({ itemId, sceneId }) {
       if (isDemo) {
-        console.log('addItemToScene',{itemId,sceneId})
         demoDispatch({
           type: DEMO_ACTIONS.SCENE_ADD_ITEM,
           payload: { itemId, sceneId },

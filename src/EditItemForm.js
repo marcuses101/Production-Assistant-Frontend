@@ -91,9 +91,8 @@ export function EditItemForm({ projectId }) {
         <div
           style={{
             display: "flex",
-            alignItems: "flex-end",
+            alignItems: "center",
             justifyContent: "center",
-            marginTop: "2rem",
           }}
         >
           <TextInput

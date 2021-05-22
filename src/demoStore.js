@@ -22,6 +22,7 @@ export const demoStore = {
       description:
         "Mollit mollit tempor magna dolor minim ex tempor dolor. Esse pariatur elit consequat nostrud aliquip sint velit fugiat elit minim adipisicing ullamco ex nisi. Anim consequat nulla enim mollit pariatur laborum proident.",
       projectId: 1,
+      date:'2021-05-24'
     },
     {
       id: 2,
@@ -29,14 +30,23 @@ export const demoStore = {
       description:
         "James fights fire robots. He destroys them with a plasma gun with Marcus",
       projectId: 1,
+      date:'2021-05-26'
     },
     {
       id: 3,
       name: "Scene 1 Project 2",
       description:
         "Amet proident consectetur eiusmod est ullamco. Sit excepteur tempor quis est voluptate exercitation minim id nulla ex nulla. Fugiat exercitation occaecat velit nulla eu eu. Pariatur anim laboris voluptate minim fugiat laborum commodo et.",
-      projectId: 2,
+      projectId: 1,
+      date:'2021-05-28'
     },
+    {
+      id:4,
+      name:'Past Scene',
+      description: 'Enim laboris nostrud nostrud elit.Quis sit sit enim quis sint laboris incididunt commodo laboris.',
+      projectId:1,
+      date:'2021-04-01'
+    }
   ],
   items: [
     {

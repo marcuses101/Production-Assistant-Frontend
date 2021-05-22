@@ -29,6 +29,8 @@ export function BudgetChart({ totalBudget, acquisitions = [] }) {
         ?<h3 style={{color:'var(--red)', padding:'1rem', textShadow:'var(--text-shadow)'}}>${amountSpent-totalBudget} over budget</h3>
         :<Pie data={data} options={options}/>
       }
+      <p><strong>Budget: </strong> ${totalBudget}</p>
+      <p><strong>Amount Spent: </strong> ${amountSpent}</p>
     </section>
   );
 }

@@ -46,7 +46,7 @@ export function AddUserForm() {
     e.preventDefault();
     if (!formValidation(validationArray)) return;
     try {
-      const newUser = await UserAPIServices.addUser({ username, password });
+      await UserAPIServices.addUser({ username, password });
       toast.success(`new user ${username} created`);
       await userLogin({ username, password });
       push('/')
@@ -64,6 +64,8 @@ export function AddUserForm() {
   }
 
   return (
+    <main style={{margin:'1rem'}}>
+
     <section className="AddUserForm">
       <form onSubmit={handleSubmit}>
         <h2>Add User</h2>
@@ -98,5 +100,6 @@ export function AddUserForm() {
         </div>
       </form>
     </section>
+    </main>
   );
 }

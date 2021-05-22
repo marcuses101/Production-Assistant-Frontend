@@ -42,6 +42,7 @@ export function AddProjectForm() {
     setters[e.target.id](e.target.value);
   }
   return (
+    <main style={{margin:'1rem'}}>
     <section className="AddProjectForm">
       <form onSubmit={onSubmit}>
         <h2>Add Project</h2>
@@ -74,5 +75,6 @@ export function AddProjectForm() {
         </div>
       </form>
     </section>
+    </main>
   );
 }

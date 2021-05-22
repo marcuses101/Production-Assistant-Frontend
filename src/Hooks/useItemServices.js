@@ -15,10 +15,10 @@ export function useItemServices() {
     },
 
     async getSceneItems(sceneId) {
-      console.log(sceneId)
       const sceneItems = sceneItem.reduce((itemsArray,{sceneId:scene_id,itemId})=>{
           return (sceneId===scene_id)?[...itemsArray,items.find(({id})=>id===itemId)]:itemsArray;
       },[]);
+      console.log({sceneItems})
       return sceneItems
     },
 

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { BudgetChart } from "./BudgetChart";
+import { BudgetChart } from "./DashboardComponents/BudgetChart";
 import { useItemServices } from "./Hooks/useItemServices";
 import { useSceneServices } from "./Hooks/useSceneServices";
-import { ItemList } from "./ItemList";
-import { SceneList } from "./SceneList";
+import { ItemList } from "./DashboardComponents/ItemList";
+import { SceneList } from "./DashboardComponents/SceneList";
 import "./ProjectDashboard.css";
 import { useAcquisitionServices } from "./Hooks/useAcquisitionServices";
+import { SceneInfo } from "./DashboardComponents/SceneInfo";
 
 export function ProjectDashboard({ project = {}, setProject }) {
   const [scenes, setScenes] = useState([]);
@@ -17,7 +18,6 @@ export function ProjectDashboard({ project = {}, setProject }) {
 
   useEffect(() => {
     (async () => {
-      console.log(project.id)
       if (project.id) {
         const [scenes, items, acquisitions] = await Promise.all([
           sceneServices.getProjectScenes(project.id),
@@ -35,9 +35,10 @@ export function ProjectDashboard({ project = {}, setProject }) {
 
   return (
     <div className="ProjectDashboard">
+      {scenes.length > 0 && <SceneInfo scenes={scenes} items={items}/>}
+      <BudgetChart totalBudget={project.budget} acquisitions={acquisitions} />
       <SceneList scenes={scenes} projectId={project.id} />
       <ItemList items={items} projectId={project.id} />
-      <BudgetChart totalBudget={project.budget} acquisitions={acquisitions} />
     </div>
   );
 }

@@ -154,6 +154,31 @@ input[type="submit"]:hover {
   cursor: pointer;
 }
 
+a.reset {
+  all:revert;
+  font-weight:bold;
+  text-shadow: var(--text-shadow);
+  text-decoration: none;
+  display:inline-block;
+  font-size:1.2rem;
+}
+a.reset:link{
+  color:var(--green);
+}
+a.reset:visited{
+  color:var(--purple)
+}
+a.reset:hover{
+  color: transparent;
+  background: linear-gradient(to right, var(--purple), var(--green)), var(--black);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-shadow: none;
+  transform: scale(1.02);
+}
+
+
+
 .flex-center {
   display: flex;
   justify-content: center;

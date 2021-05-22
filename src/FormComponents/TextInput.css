@@ -10,8 +10,8 @@
 
 .TextInput {
   background: transparent;
-  margin:auto;
-  margin-top: 1.5rem;
+  margin:2rem auto;
+  display:block;
   width: 300px;
   position: relative;
   border-bottom: 2px solid var(--light-grey);

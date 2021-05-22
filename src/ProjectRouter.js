@@ -23,7 +23,6 @@ export function ProjectRouter() {
 
   useEffect(() => {
     (async () => {
-      console.log("getProject");
       try {
         const project = await projectServices.getProjectById(parseInt(projectId))
         setProject(project);

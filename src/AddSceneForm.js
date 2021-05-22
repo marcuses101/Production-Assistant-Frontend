@@ -44,11 +44,11 @@ export function AddSceneForm() {
       });
       setItems(items);
     })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId]);
 
   async function onSubmit(e) {
     e.preventDefault();
-    console.log({ items });
     if (!formValidation(validationArray)) return;
     try {
       const { id: sceneId } = await sceneServices.addScene({
