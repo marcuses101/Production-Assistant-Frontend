@@ -35,7 +35,7 @@ export function ProjectDashboard({ project = {}, setProject }) {
 
   return (
     <div className="ProjectDashboard">
-      {scenes.length > 0 && <SceneInfo scenes={scenes} items={items}/>}
+      <SceneInfo scenes={scenes} items={items}/>
       <BudgetChart totalBudget={project.budget} acquisitions={acquisitions} />
       <SceneList scenes={scenes} projectId={project.id} />
       <ItemList items={items} projectId={project.id} />
