@@ -4,10 +4,10 @@ import { TextInput } from "./FormComponents/TextInput";
 import { PasswordInput } from "./FormComponents/PasswordInput";
 import { useFormValidation } from "./Hooks/useFormValidation";
 import { useToast } from "./Hooks/useToast";
-import { useLoginActions } from "./Hooks/useLoginActions";
+import { useUserServices } from "./Hooks/useUserServices";
 
 export function LoginForm() {
-  const {userLogin} = useLoginActions();
+  const {userLogin} = useUserServices();
   const toast = useToast();
   const formValidation = useFormValidation();
   const { push } = useHistory();

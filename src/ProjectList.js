@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useProjectServices } from "./Hooks/useProjectServices";
-import { useLoginActions } from "./Hooks/useLoginActions";
-
+import {useUserServices} from './Hooks/useUserServices'
 export function ProjectList() {
   const [projects, setProjects] = useState([]);
   const projectServices = useProjectServices();
-  const { logout } = useLoginActions();
+  const { logout } = useUserServices();
 
   useEffect(() => {
     (async () => {

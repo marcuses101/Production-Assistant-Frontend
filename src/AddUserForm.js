@@ -3,12 +3,11 @@ import { useHistory } from "react-router-dom";
 import { TextInput } from "./FormComponents/TextInput";
 import { PasswordInput } from "./FormComponents/PasswordInput";
 import { useFormValidation } from "./Hooks/useFormValidation";
-import { UserAPIServices } from "./API/UserAPIServices";
+import {useUserServices} from './Hooks/useUserServices'
 import { useToast } from "./Hooks/useToast";
-import { useLoginActions } from "./Hooks/useLoginActions";
 
 export function AddUserForm() {
-  const { userLogin } = useLoginActions();
+  const {addUser, userLogin} = useUserServices()
   const toast = useToast();
   const formValidation = useFormValidation();
   const { push } = useHistory();
@@ -46,7 +45,7 @@ export function AddUserForm() {
     e.preventDefault();
     if (!formValidation(validationArray)) return;
     try {
-      await UserAPIServices.addUser({ username, password });
+      await addUser({ username, password });
       toast.success(`new user ${username} created`);
       await userLogin({ username, password });
       push('/')

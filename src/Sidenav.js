@@ -1,11 +1,11 @@
-import { useLoginActions } from "./Hooks/useLoginActions";
 import { Link, useHistory } from "react-router-dom";
 import { useParamsProjectId } from "./Hooks/useParamsProjectId";
+import { useUserServices } from "./Hooks/useUserServices";
 import "./Sidenav.css";
 
 export function Sidenav() {
   const { push } = useHistory();
-  const loginActions = useLoginActions();
+  const {logout} = useUserServices();
   const projectId = useParamsProjectId();
   function closeNav(){
     const root = document.getElementById('root');
@@ -41,7 +41,7 @@ export function Sidenav() {
         <li>
           <button
             onClick={() => {
-              loginActions.logout();
+              logout();
               push("/");
             }}
           >
