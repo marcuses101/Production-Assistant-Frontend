@@ -17,7 +17,7 @@
 }
 
 .Sidenav ul li:last-child {
-  margin-top: 3rem;
+  margin-top: 3rem; /* this needs to be applied!!! */
 }
 
 @media screen and (max-width: 1000px) {
