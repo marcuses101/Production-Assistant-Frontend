@@ -67,7 +67,7 @@ export function SceneInfo({ scenes = [] }) {
       </>
     ) : (
       <>
-        <strong>{numberItemsUnAcquired}</strong> items left to acquired. Go to{" "}
+        <strong>{numberItemsUnAcquired}</strong> items left to be acquired.<br/> Go to{" "}
         <Link className="reset" to={`/project/${projectId}/item`}>
           Shopping List
         </Link>

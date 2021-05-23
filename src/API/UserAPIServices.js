@@ -10,9 +10,10 @@ export const UserAPIServices = {
       },
       body: JSON.stringify({username,password})
     })
-    if (!response.ok) throw new Error('add user failed');
-    const text = response.text();
-    return text;
+    const user = await response.json();
+    console.log(user);
+    if (!response.ok) throw new Error(user.error.message);
+    return user;
   },
   async login({username,password}){
     const response = await fetch(`${SERVER}/user/login`,{

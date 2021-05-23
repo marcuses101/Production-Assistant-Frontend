@@ -154,6 +154,7 @@ input[type="submit"]:hover {
   cursor: pointer;
 }
 
+
 a.reset {
   all:revert;
   font-weight:bold;
@@ -163,10 +164,10 @@ a.reset {
   font-size:1.2rem;
 }
 a.reset:link{
-  color:var(--green);
+  color:var(--purple);
 }
 a.reset:visited{
-  color:var(--purple)
+  color:var(--green);
 }
 a.reset:hover{
   color: transparent;

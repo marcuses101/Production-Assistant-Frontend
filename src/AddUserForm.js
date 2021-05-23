@@ -51,7 +51,7 @@ export function AddUserForm() {
       await userLogin({ username, password });
       push('/')
     } catch (error) {
-      toast({ message: "server error", type: "error" });
+      toast({ message: error.message || "server error", type: "error" });
     }
   }
   function handleInputChange(e) {

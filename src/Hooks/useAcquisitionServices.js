@@ -31,7 +31,7 @@ export function useAcquisitionServices() {
       if (!response.ok) {
         throw new Error(serverAcquisitions?.error?.message || "server error");
       }
-      return acquisitions;
+      return serverAcquisitions;
     },
     async addAcquisition({ total, projectId, acquisitionType }) {
       if (isDemo) {
