@@ -1,9 +1,13 @@
 .ProjectDashboard{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-rows: 350px;
   gap: 1rem;
 }
-
+.ProjectDashboard section ul {
+  overflow-y: auto;
+  max-height: calc(100% - 40px);
+}
  @media screen and (max-width: 500px) {
   .ProjectDashboard{
     grid-template-columns: 1fr;
