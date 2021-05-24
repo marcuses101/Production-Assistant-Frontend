@@ -1,7 +1,7 @@
 # Production Assistant Application
 
-**[Live Site](https://production-assistant.vercel.app/)**  
-**[Server](https://production-assistant-server.herokuapp.com)** 
+**[Live Site](https://production-assistant.vercel.app/)**   
+**[Server](https://production-assistant-server.herokuapp.com)**  
 **[Server Repo](https://github.com/marcuses101/Production-Assistant-Server)**
 
 ## Summary
