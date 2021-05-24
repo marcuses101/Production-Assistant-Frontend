@@ -1,6 +1,6 @@
 import { Link, useHistory } from "react-router-dom";
-import { useParamsProjectId } from "./Hooks/useParamsProjectId";
-import { useUserServices } from "./Hooks/useUserServices";
+import { useParamsProjectId } from "../Hooks/useParamsProjectId";
+import { useUserServices } from "../Hooks/useUserServices";
 import "./Sidenav.css";
 
 export function Sidenav() {

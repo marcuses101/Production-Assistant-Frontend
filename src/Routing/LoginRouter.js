@@ -1,8 +1,8 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { Landing } from "./Landing";
-import { AddUserForm } from "./AddUserForm";
-import { LoginForm } from "./LoginForm";
+import { Landing } from "../Pages/Landing";
+import { AddUserForm } from "../Pages/AddUserForm";
+import { LoginForm } from "../Pages/LoginForm";
 
 export function LoginRouter(props) {
   return (

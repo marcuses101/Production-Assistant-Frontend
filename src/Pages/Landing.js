@@ -1,5 +1,5 @@
 import React from "react";
-import LoginLinks from "./LoginLinks";
+import LoginLinks from "../LoginLinks";
 
 const gridStyle = {
   display: "grid",

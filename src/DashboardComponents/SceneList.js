@@ -12,12 +12,13 @@ export function SceneList({ projectId, scenes = [] }) {
 
   return (
     <section className="SceneList">
-      <h2>Scene List</h2>
+      <h2>Scenes</h2>
       <ul>
         <li>
           <Link to={`/project/${projectId}/scene/add`}>+ Add Scene</Link>
         </li>
       </ul>
+      <h3>Edit</h3>
       <ul>
         {sceneItems}
       </ul>

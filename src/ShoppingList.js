@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect } from "react";
 import { useItemServices } from "./Hooks/useItemServices";
 import { useParamsProjectId } from "./Hooks/useParamsProjectId";
 import { useToast } from "./Hooks/useToast";
@@ -11,35 +11,77 @@ export function ShoppingList() {
   const ItemServices = useItemServices();
   const [items, setItems] = useState([]);
   const [checkedItemIds, setCheckedItemIds] = useState([]);
+  const [acquiredFilter, setAcquiredFilter] = useState();
 
-  function handleCheck(e) {
-    const {id} = e.target.dataset;
+  function handleClick(id) {
     const itemId = parseInt(id);
     setCheckedItemIds((arr) => {
-      return arr.includes(itemId)
+      const itemPreviouslyChecked = arr.includes(itemId);
+      const newArray = itemPreviouslyChecked
         ? arr.filter((id) => id !== itemId)
         : [...arr, parseInt(itemId)];
+      if (newArray.length === 0) {
+        setAcquiredFilter();
+      } else {
+        const { acquired } = items.find(({ id }) => id === itemId);
+        console.log({ acquired });
+        setAcquiredFilter(acquired);
+      }
+      return newArray;
     });
   }
-  const listItems = items.map(({ name, id, quantity, acquired }) => {
-    const itemChecked = checkedItemIds.includes(id);
-    return (
-      <Fragment key={id}>
-        <span>
-          <input
-            type="checkbox"
-            checked={itemChecked}
-            disabled={acquired}
-            data-id={id}
-            onChange={handleCheck}
-          />
-        </span>
-        <span>{name}</span>
-        <span>{quantity}</span>
-        <span>{acquired ? "Yes" : "No"}</span>
-      </Fragment>
-    );
-  });
+  function cancel() {
+    setCheckedItemIds([]);
+    setAcquiredFilter();
+  }
+  async function unAcquire() {
+    try {
+      await Promise.all(
+        checkedItemIds.map((id) => {
+          const item = items.find((item) => item.id === id);
+          return ItemServices.editItem({ ...item, acquired: false });
+        })
+      );
+      setItems((items) =>
+        items.map((item) =>
+          checkedItemIds.includes(item.id) ? { ...item, acquired: false } : item
+        )
+      );
+      setAcquiredFilter();
+      setCheckedItemIds([]);
+    } catch (error) {
+      toast.error(error);
+    }
+  }
+
+  // if item filter items based on whether checked item's acquired property
+  const listItems = items
+    .filter((item) => {
+      if (acquiredFilter === undefined) return true;
+      return item.acquired === acquiredFilter;
+    })
+    .map(({ name, id, quantity, acquired }) => {
+      const itemChecked = checkedItemIds.includes(id);
+      return (
+        <li key={id} onClick={() => handleClick(id)}>
+          <div className="checkbox">{itemChecked ? <h2>✓</h2> : ""}</div>
+          <div className="grid">
+            <span>
+              <strong>Item Name:</strong>
+              <p>{name}</p>
+            </span>
+            <span>
+              <strong>Quantity: </strong>
+              <p>{quantity}</p>
+            </span>
+            <span>
+              <strong>Acquired: </strong>
+              <p>{acquired ? "Yes" : "No"}</p>
+            </span>
+          </div>
+        </li>
+      );
+    });
 
   useEffect(() => {
     (async () => {
@@ -50,27 +92,42 @@ export function ShoppingList() {
         toast.error(error.message);
       }
     })();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId]);
   return (
     <>
       <section className="ShoppingList">
         <h2>Shopping list</h2>
-        <div className="grid">
-          <h3>Select</h3>
-          <h3>Item Name</h3>
-          <h3>Quantity</h3>
-          <h3>Acquired</h3>
-          {listItems}
-        </div>
-        {checkedItemIds.length > 0 && (
+        <ul>{listItems}</ul>
+      </section>
+      {acquiredFilter === false && (
+        <section>
           <AddAcquisitionForm
             setCheckedItemIds={setCheckedItemIds}
             setItems={setItems}
+            setAcquiredFilter={setAcquiredFilter}
             checkedItemIds={checkedItemIds}
+            cancel={cancel}
           />
-        )}
-      </section>
+        </section>
+      )}
+      {acquiredFilter === true && (
+        <section>
+          <h3>Set acquired to false?</h3>
+          <div
+            style={{
+              margin: "1rem",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <button type="submit" onClick={unAcquire}>
+              Yes
+            </button>
+            <button onClick={cancel}>Cancel</button>
+          </div>
+        </section>
+      )}
     </>
   );
 }

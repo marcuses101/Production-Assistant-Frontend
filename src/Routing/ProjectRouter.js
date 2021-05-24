@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
-import { EditProjectForm } from "./EditProjectForm";
-import { AddItemForm } from "./AddItemForm";
-import { EditItemForm } from "./EditItemForm";
-import { ProjectDashboard } from "./ProjectDashboard";
-import { AddSceneForm } from "./AddSceneForm";
-import EditSceneForm from "./EditSceneForm";
-import {AddAcquisitionForm} from './AddAcquisitionForm'
+import { EditProjectForm } from "../EditProjectForm";
+import { AddItemForm } from "../AddItemForm";
+import { EditItemForm } from "../EditItemForm";
+import { ProjectDashboard } from "../Pages/ProjectDashboard";
+import { AddSceneForm } from "../AddSceneForm";
+import EditSceneForm from "../EditSceneForm";
+import {AddAcquisitionForm} from '../AddAcquisitionForm'
 import { Sidenav } from "./Sidenav";
 import "./ProjectRouter.css";
-import { useProjectServices } from "./Hooks/useProjectServices";
-import { useParamsProjectId } from "./Hooks/useParamsProjectId";
-import { ShoppingList } from "./ShoppingList";
+import { useProjectServices } from "../Hooks/useProjectServices";
+import { useParamsProjectId } from "../Hooks/useParamsProjectId";
+import { ShoppingList } from "../ShoppingList";
 import { NavButton } from './NavButton'
 
 export function ProjectRouter() {
@@ -61,7 +61,6 @@ export function ProjectRouter() {
           <Route path="/project/:projectId/item/add">
             <AddItemForm projectId={project?.id} />
           </Route>
-
           <Route path="/project/:projectId/item/:itemId/edit">
             <EditItemForm projectId={projectId} />
           </Route>

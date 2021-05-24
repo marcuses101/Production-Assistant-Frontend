@@ -6,7 +6,7 @@ export function removeUndefined(obj) {
     return obj;
   },{})
 }
-
+// used for generating random id in demo mode
 export function randomIntId(){
   return Math.floor(Math.random()*10000000000)
 }

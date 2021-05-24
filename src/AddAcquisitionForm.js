@@ -6,7 +6,7 @@ import { NumberInput } from "./FormComponents/NumberInput";
 import { useHistory } from "react-router-dom";
 import { useToast } from "./Hooks/useToast";
 import "./AddAcquisitionForm.css";
-export function AddAcquisitionForm({ checkedItemIds,setCheckedItemIds, setItems }) {
+export function AddAcquisitionForm({ checkedItemIds,setCheckedItemIds, setItems, cancel , setAcquiredFilter}) {
   const { goBack } = useHistory();
   const toast = useToast();
   const projectId = useParamsProjectId();
@@ -41,6 +41,7 @@ export function AddAcquisitionForm({ checkedItemIds,setCheckedItemIds, setItems 
       );
       setCheckedItemIds([]);
       setTotal(0);
+      setAcquiredFilter();
       toast.success("Acquisition logged");
     } catch (error) {}
   }
@@ -75,7 +76,7 @@ export function AddAcquisitionForm({ checkedItemIds,setCheckedItemIds, setItems 
         />
       </div>
       <input type="submit" value="Submit" />
-      <button type="button" className="cancel" onClick={goBack}>
+      <button type="button" className="cancel" onClick={cancel}>
         Cancel
       </button>
     </form>

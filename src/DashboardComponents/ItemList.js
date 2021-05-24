@@ -12,10 +12,11 @@ export function ItemList({items = [] ,projectId}) {
 
   return (
     <section>
-      <h2>Item List</h2>
+      <h2>Items</h2>
       <ul>
         <li key='addItem'><Link to={`/project/${projectId}/item/add`}>+ Add Item</Link></li>
       </ul>
+      <h3>Edit</h3>
       <ul>
       {listItems}
       </ul>

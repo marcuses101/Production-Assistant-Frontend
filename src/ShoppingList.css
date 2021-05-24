@@ -1,11 +1,48 @@
-.ShoppingList .grid {
-  margin-top: 1rem;
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: .5rem;
-  margin:1rem 0;
+.ShoppingList {
+  margin-bottom: 1rem;
+  max-height: 75vh;
+  overflow-y: auto;
 }
 
-.ShoppingList .grid>* {
-  text-align: center;
+.ShoppingList ul {
+  display:grid;
+  grid-template-columns: repeat(auto-fill,minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.ShoppingList li {
+  box-shadow: var(--box-shadow-outline);
+  border-radius: var(--br);
+  margin:0;
+  padding: .5rem;
+  display: grid;
+  grid-template-columns: 75px 1fr;
+  place-items: center;
+  gap: .25rem;
+}
+
+.ShoppingList li p {
+  margin: .25rem;
+}
+
+.ShoppingList li:hover{
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+.ShoppingList .checkbox{
+  width: 30px;
+  height: 30px;
+  display:grid;
+  place-items:center;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow-outline);
+}
+
+.ShoppingList .grid {
+  width:100%;
+  display: grid;
+  place-items: unset;
+  grid-template-columns: repeat(auto-fill,minmax(100px, 1fr));
+  gap: .25rem;
 }

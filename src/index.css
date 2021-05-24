@@ -71,6 +71,11 @@ h2 {
   text-shadow: var(--text-shadow);
 }
 
+h3 {
+  border-bottom: 3px solid var(--lighten);
+  padding-bottom: .5rem;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

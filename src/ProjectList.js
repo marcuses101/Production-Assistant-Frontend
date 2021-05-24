@@ -21,6 +21,7 @@ export function ProjectList() {
   ));
   return (
     <main style={{margin:'1rem'}}>
+    <section className='ProjectList'>
       <h2>Project List</h2>
       <ul>
         {projectLinks}
@@ -31,6 +32,7 @@ export function ProjectList() {
           <button onClick={logout}>Logout</button>
         </li>
       </ul>
+    </section>
     </main>
   );
 }

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { TextInput } from "./FormComponents/TextInput";
-import { PasswordInput } from "./FormComponents/PasswordInput";
-import { useFormValidation } from "./Hooks/useFormValidation";
-import { useToast } from "./Hooks/useToast";
-import { useUserServices } from "./Hooks/useUserServices";
+import { TextInput } from "../FormComponents/TextInput";
+import { PasswordInput } from "../FormComponents/PasswordInput";
+import { useFormValidation } from "../Hooks/useFormValidation";
+import { useToast } from "../Hooks/useToast";
+import { useUserServices } from "../Hooks/useUserServices";
 
 export function LoginForm() {
   const {userLogin} = useUserServices();

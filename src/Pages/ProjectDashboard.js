@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { BudgetChart } from "./DashboardComponents/BudgetChart";
-import { useItemServices } from "./Hooks/useItemServices";
-import { useSceneServices } from "./Hooks/useSceneServices";
-import { ItemList } from "./DashboardComponents/ItemList";
-import { SceneList } from "./DashboardComponents/SceneList";
+import { BudgetChart } from "../DashboardComponents/BudgetChart";
+import { useItemServices } from "../Hooks/useItemServices";
+import { useSceneServices } from "../Hooks/useSceneServices";
+import { ItemList } from "../DashboardComponents/ItemList";
+import { SceneList } from "../DashboardComponents/SceneList";
 import "./ProjectDashboard.css";
-import { useAcquisitionServices } from "./Hooks/useAcquisitionServices";
-import { SceneInfo } from "./DashboardComponents/SceneInfo";
+import { useAcquisitionServices } from "../Hooks/useAcquisitionServices";
+import { SceneInfo } from "../DashboardComponents/SceneInfo";
 
 export function ProjectDashboard({ project = {}, setProject }) {
   const [scenes, setScenes] = useState([]);

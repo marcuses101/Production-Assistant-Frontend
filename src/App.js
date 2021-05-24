@@ -2,8 +2,8 @@ import React, { useReducer, useState, useEffect } from "react";
 import { MainContext } from "./MainContext";
 import { demoReducer } from "./demoReducer";
 import { demoStore } from "./demoStore";
-import { AppRouter } from "./AppRouter";
-import { LoginRouter } from "./LoginRouter";
+import { AppRouter } from "./Routing/AppRouter";
+import { LoginRouter } from "./Routing/LoginRouter";
 
 function App() {
   const [isDemo, setIsDemo] = useState(true);
