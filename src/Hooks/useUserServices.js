@@ -46,7 +46,6 @@ export function useUserServices() {
         body: JSON.stringify({username,password})
       })
       const user = await response.json();
-      console.log(user);
       if (!response.ok) throw new Error(user.error.message);
       return user;
     },

@@ -23,7 +23,6 @@ export function SceneInfo({ scenes = [] }) {
           const sceneItems = await itemServices.getSceneItems(nextScene.id);
           setSceneItems(sceneItems);
         } catch (e) {
-          console.log(e);
           setSceneItems([]);
         }
       })();

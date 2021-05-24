@@ -24,7 +24,6 @@ export function ProjectDashboard({ project = {}, setProject }) {
           itemServices.getProjectItems(project.id),
           acquisitionServices.getProjectAcquisitions(project.id),
         ]);
-        console.log({scenes,items,acquisitions});
         setScenes(scenes);
         setItems(items);
         setAcquisitions(acquisitions);

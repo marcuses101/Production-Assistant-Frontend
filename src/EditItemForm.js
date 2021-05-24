@@ -73,7 +73,6 @@ export function EditItemForm({ projectId }) {
       toast({ message: `${name} updated`, type: "success" });
       goBack();
     } catch (error) {
-      console.log(error.message);
       toast({ message: error.message, type: "error" });
     }
   }
