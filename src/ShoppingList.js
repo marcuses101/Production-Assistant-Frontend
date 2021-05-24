@@ -4,6 +4,7 @@ import { useParamsProjectId } from "./Hooks/useParamsProjectId";
 import { useToast } from "./Hooks/useToast";
 import { AddAcquisitionForm } from "./AddAcquisitionForm";
 import "./ShoppingList.css";
+import { Link } from "react-router-dom";
 
 export function ShoppingList() {
   const toast = useToast();
@@ -97,6 +98,16 @@ export function ShoppingList() {
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId]);
+
+  // Display message to add items if no items in project.
+  if (items.length === 0) {
+    return (
+      <section className="ShoppingList">
+      <h2>Shopping list</h2>
+      <p>No items set on this project. <Link to={`/project/${projectId}/item/add`}>Add item</Link>?</p>
+      </section>
+    )
+  }
   return (
     <>
       <section className="ShoppingList">
