@@ -103,10 +103,13 @@ export function ShoppingList() {
   if (items.length === 0) {
     return (
       <section className="ShoppingList">
-      <h2>Shopping list</h2>
-      <p>No items set on this project. <Link to={`/project/${projectId}/item/add`}>Add item</Link>?</p>
+        <h2>Shopping list</h2>
+        <p>
+          No items set on this project.{" "}
+          <Link to={`/project/${projectId}/item/add`}>Add item</Link>?
+        </p>
       </section>
-    )
+    );
   }
   return (
     <>
