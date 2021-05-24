@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { MainContext } from "../MainContext";
 import { useToast } from "./useToast";
 import {config} from '../config'
-const {SERVER} = config
+const {SERVER,PING} = config
 
 export function useUserServices() {
   const { setIsDemo, setIsLoggedIn } = useContext(MainContext);
@@ -11,6 +11,9 @@ export function useUserServices() {
     demoLogin() {
       setIsDemo(true);
       setIsLoggedIn(true);
+    },
+    async ping(){
+      await fetch(PING);
     },
     async userLogin({ username, password }) {
       try {

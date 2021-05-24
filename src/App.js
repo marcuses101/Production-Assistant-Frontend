@@ -4,9 +4,11 @@ import { demoReducer } from "./demoReducer";
 import { demoStore } from "./demoStore";
 import { AppRouter } from "./Routing/AppRouter";
 import { LoginRouter } from "./Routing/LoginRouter";
+import { useUserServices } from "./Hooks/useUserServices";
 
 function App() {
   const [isDemo, setIsDemo] = useState(true);
+  const {ping} = useUserServices()
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [demoData, demoDispatch] = useReducer(demoReducer, demoStore);
 
@@ -19,6 +21,7 @@ function App() {
   };
 
   useEffect(() => {
+    ping();
     const token = localStorage.getItem("accessToken");
     if (token) {
       setIsDemo(false);

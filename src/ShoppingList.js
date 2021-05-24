@@ -36,17 +36,20 @@ export function ShoppingList() {
   }
   async function unAcquire() {
     try {
+      // set checked items acquired values to false
       await Promise.all(
         checkedItemIds.map((id) => {
           const item = items.find((item) => item.id === id);
           return ItemServices.editItem({ ...item, acquired: false });
         })
       );
+      // reflect change locally
       setItems((items) =>
         items.map((item) =>
           checkedItemIds.includes(item.id) ? { ...item, acquired: false } : item
         )
       );
+      //uncheck all items. clear filter
       setAcquiredFilter();
       setCheckedItemIds([]);
     } catch (error) {
