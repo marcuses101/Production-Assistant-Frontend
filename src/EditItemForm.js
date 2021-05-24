@@ -125,7 +125,7 @@ export function EditItemForm({ projectId }) {
           >
             Cancel
           </button>
-          <button type="button" onClick={removeItem}>
+          <button className='remove' type="button" onClick={removeItem}>
             Remove Item
           </button>
         </div>

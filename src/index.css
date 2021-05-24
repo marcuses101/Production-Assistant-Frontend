@@ -114,6 +114,11 @@ a:hover {
   background-color: var(--white);
   cursor: pointer;
 }
+
+button.remove:hover{
+  background-color: var(--red);
+}
+
 button:focus,
 textarea:focus {
   outline: 0;

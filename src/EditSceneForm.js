@@ -95,6 +95,10 @@ export default function EditSceneForm() {
     };
     setters[e.target.id](e.target.value);
   }
+  async function removeScene(){
+    await sceneServices.removeScene(sceneId);
+    goBack();
+  }
 
   function handleCheck(e) {
     const {checked, dataset:{id}} = e.target;
@@ -142,6 +146,9 @@ export default function EditSceneForm() {
           <button type="submit">Submit Changes</button>
           <button type="button" className="cancel" onClick={goBack}>
             Cancel
+          </button>
+          <button className='remove' type="button" onClick={removeScene}>
+            Remove Scene
           </button>
         </div>
       </form>
