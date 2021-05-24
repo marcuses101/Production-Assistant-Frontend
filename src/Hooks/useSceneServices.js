@@ -113,17 +113,23 @@ export function useSceneServices() {
       if (isDemo) {
         demoDispatch({
           type: DEMO_ACTIONS.SCENE_ADD_ITEM,
-          payload: { itemId, sceneId },
+          payload: {sceneId,itemId},
         });
         return;
       }
 
       const token = localStorage.getItem("accessToken");
-      const response = await fetch(`${SERVER}/scene`, {
+      const response = await fetch(`${SERVER}/scene/item`, {
+        method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({scene_id:sceneId,item_id:itemId})
       });
+      const data = await response.json()
+      if(!response.ok) throw new Error(data?.error?.message || 'server error')
+      return data
     },
 
     async removeItemFromScene({ itemId, sceneId }) {
@@ -136,11 +142,17 @@ export function useSceneServices() {
       }
 
       const token = localStorage.getItem("accessToken");
-      const response = await fetch(`${SERVER}/scene`, {
+      const response = await fetch(`${SERVER}/scene/item`, {
+        method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({scene_id:sceneId,item_id:itemId})
       });
+      const data = await response.json()
+      if(!response.ok) throw new Error(data?.error?.message || 'server error')
+      return data
     },
   };
 }

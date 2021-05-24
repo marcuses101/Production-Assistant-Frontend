@@ -55,7 +55,7 @@ export function useAcquisitionServices() {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
-          total_cost: total,
+          total,
           project_id: projectId,
           acquisition_type: acquisitionType,
         }),

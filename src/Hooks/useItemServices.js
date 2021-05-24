@@ -122,7 +122,14 @@ export function useItemServices() {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(item),
+        body: JSON.stringify({
+          project_id: projectId,
+          name,
+          description,
+          quantity,
+          acquisition_id: acquisitionId,
+          acquired,
+        }),
       });
       const data = response.json();
       if (!response.ok) {
@@ -163,7 +170,13 @@ export function useItemServices() {
           Authorization: `Bearer ${token}`,
           "Content-type": "application/json",
         },
-        body: JSON.stringify(item),
+        body: JSON.stringify({
+          name,
+          description,
+          acquisition_id: acquisitionId,
+          acquired,
+          quantity
+        }),
       });
       const data = await response.json();
       if (!response.ok) {
