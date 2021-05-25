@@ -42,8 +42,9 @@ export function useProjectServices() {
           Authorization: `Bearer ${token}`,
         },
       });
-      const APIProject = await response.json();
-      return APIProject;
+      const data = await response.json();
+      if (!response.ok) throw new Error(data?.error?.message || 'server error')
+      return data;
     },
     async addProject({ name, description, budget }) {
 
@@ -63,8 +64,11 @@ export function useProjectServices() {
         body: JSON.stringify({ name, budget, description }),
       });
 
-      const project = await response.json();
-      return project;
+      const data = await response.json();
+      if (!response.ok) throw new Error(data?.error?.message || 'server error')
+
+
+      return data;
 
     },
     async editProject({ name, description, budget, id }) {
@@ -86,8 +90,10 @@ export function useProjectServices() {
         },
         body: JSON.stringify({ name, budget, description }),
       });
-      const project = await response.json();
-      return project;
+      const data = await response.json();
+      if (!response.ok) throw new Error(data?.error?.message || 'server error')
+
+      return data;
 
     },
     async removeProject(id) {
@@ -104,7 +110,10 @@ export function useProjectServices() {
           Authorization: `Bearer ${token}`,
         }
       });
-      if (!response.ok) throw new Error('server error')
+      if (!response.ok) {
+        const data = await response.json();
+        if (!response.ok) throw new Error(data?.error?.message || 'server error')
+      }
     },
   };
 }

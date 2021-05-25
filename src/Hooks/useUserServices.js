@@ -1,22 +1,20 @@
 import { useContext } from "react";
 import { MainContext } from "../MainContext";
-import { useToast } from "./useToast";
 import {config} from '../config'
 const {SERVER,PING} = config
 
 export function useUserServices() {
   const { setIsDemo, setIsLoggedIn } = useContext(MainContext);
-  const toast = useToast();
   return {
     demoLogin() {
       setIsDemo(true);
       setIsLoggedIn(true);
     },
+    // used to ping the server on app load. reduce perceived cold start
     async ping(){
       await fetch(PING);
     },
     async userLogin({ username, password }) {
-      try {
         const response = await fetch(`${SERVER}/user/login`,{
           method:"POST",
           headers: {
@@ -24,16 +22,12 @@ export function useUserServices() {
           },
           body: JSON.stringify({username,password})
         })
-        const {accessToken,error} = await response.json();
-        if (!response.ok) throw error?.message;
+        const data = await response.json();
+        if (!response.ok) throw new Error(data?.error?.message || "server error");
 
-        localStorage.setItem("accessToken", accessToken);
-        toast.success(`${username} logged in`);
+        localStorage.setItem("accessToken", data.accessToken);
         setIsDemo(false);
         setIsLoggedIn(true);
-      } catch (error) {
-        toast.error(error);
-      }
     },
     logout() {
       localStorage.removeItem("accessToken");
@@ -48,9 +42,11 @@ export function useUserServices() {
         },
         body: JSON.stringify({username,password})
       })
-      const user = await response.json();
-      if (!response.ok) throw new Error(user.error.message);
-      return user;
+      const data = await response.json();
+
+      if (!response.ok) throw new Error(data?.error?.message || "server error");
+
+      return data;
     },
   };
 }

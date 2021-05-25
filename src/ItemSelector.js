@@ -11,8 +11,8 @@ const liStyle = {
 export function ItemSelector({ items, handleCheck }) {
   const listItems = items.map((item) => {
     return (
-      <label htmlFor={`checkbox-${item.id}`}>
-        <li key={item.id} style={liStyle}>
+      <label key={item.id} htmlFor={`checkbox-${item.id}`}>
+        <li style={liStyle}>
           <span>
             Select:
             <br />

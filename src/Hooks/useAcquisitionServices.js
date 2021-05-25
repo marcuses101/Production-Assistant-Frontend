@@ -60,8 +60,12 @@ export function useAcquisitionServices() {
           acquisition_type: acquisitionType,
         }),
       });
-      const acquisition = await response.json();
-      return acquisition;
+
+      const data = await response.json();
+
+      if (!response.ok) throw new Error(data?.error?.message || "server error");
+
+      return data;
     },
     async removeAcquisition(id) {
       if (isDemo) {
@@ -76,7 +80,8 @@ export function useAcquisitionServices() {
         },
       });
       if (!response.ok) {
-        throw new Error("server error");
+        const data = await response.json();
+        throw new Error(data?.error?.message || 'server error');
       }
     },
     async editAcquisition({ id, total, acquisitionType }) {
@@ -93,9 +98,15 @@ export function useAcquisitionServices() {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ total_cost:total, acquisition_type:acquisitionType }),
+        body: JSON.stringify({
+          total_cost: total,
+          acquisition_type: acquisitionType,
+        }),
       });
       const acquisition = await response.json();
+
+      if (!response.ok) throw new Error(acquisition?.error?.message || 'server Error')
+
       return acquisition;
     },
   };

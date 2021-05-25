@@ -15,7 +15,9 @@ export function useSceneServices() {
   return {
     async getProjectScenes(projectId) {
       if (isDemo) {
-        return scenes.filter((scene) => parseInt(scene.projectId) === parseInt(projectId));
+        return scenes.filter(
+          (scene) => parseInt(scene.projectId) === parseInt(projectId)
+        );
       }
 
       const token = localStorage.getItem("accessToken");
@@ -24,8 +26,10 @@ export function useSceneServices() {
           Authorization: `Bearer ${token}`,
         },
       });
-      const APIScenes = await response.json();
-      return APIScenes;
+      const data = await response.json();
+      if (!response.ok) throw new Error(data?.error?.message || "server error");
+
+      return data;
     },
 
     async getSceneById(sceneId) {
@@ -41,13 +45,15 @@ export function useSceneServices() {
           Authorization: `Bearer ${token}`,
         },
       });
-      const APIScene = await response.json();
-      return APIScene;
+      const data = await response.json();
+      if (!response.ok) throw new Error(data?.error?.message || "server error");
+
+      return data;
     },
 
     async addScene({ projectId, name, description, date }) {
       if (isDemo) {
-        const scene = { projectId, name, description, id: randomIntId(), date};
+        const scene = { projectId, name, description, id: randomIntId(), date };
         demoDispatch({ type: DEMO_ACTIONS.SCENE_ADD, payload: scene });
         return scene;
       }
@@ -66,8 +72,10 @@ export function useSceneServices() {
           date: date,
         }),
       });
-      const scene = await response.json();
-      return scene;
+      const data = await response.json();
+      if (!response.ok) throw new Error(data?.error?.message || "server error");
+
+      return data;
     },
 
     async editScene({ name, description, id, date }) {
@@ -87,8 +95,10 @@ export function useSceneServices() {
         body: JSON.stringify({ name, description, date }),
       });
 
-      const scene = await response.json();
-      return scene;
+      const data = await response.json();
+      if (!response.ok) throw new Error(data?.error?.message || "server error");
+
+      return data;
     },
 
     async removeScene(id) {
@@ -104,16 +114,17 @@ export function useSceneServices() {
           Authorization: `Bearer ${token}`,
         },
       });
-      if (!response.ok) {
-        throw new Error("server error");
-      }
+      const data = await response.json();
+      if (!response.ok) throw new Error(data?.error?.message || "server error");
+
+      return data;
     },
 
     async addItemToScene({ itemId, sceneId }) {
       if (isDemo) {
         demoDispatch({
           type: DEMO_ACTIONS.SCENE_ADD_ITEM,
-          payload: {sceneId,itemId},
+          payload: { sceneId, itemId },
         });
         return;
       }
@@ -125,11 +136,11 @@ export function useSceneServices() {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({scene_id:sceneId,item_id:itemId})
+        body: JSON.stringify({ scene_id: sceneId, item_id: itemId }),
       });
-      const data = await response.json()
-      if(!response.ok) throw new Error(data?.error?.message || 'server error')
-      return data
+      const data = await response.json();
+      if (!response.ok) throw new Error(data?.error?.message || "server error");
+      return data;
     },
 
     async removeItemFromScene({ itemId, sceneId }) {
@@ -148,11 +159,11 @@ export function useSceneServices() {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({scene_id:sceneId,item_id:itemId})
+        body: JSON.stringify({ scene_id: sceneId, item_id: itemId }),
       });
-      const data = await response.json()
-      if(!response.ok) throw new Error(data?.error?.message || 'server error')
-      return data
+      const data = await response.json();
+      if (!response.ok) throw new Error(data?.error?.message || "server error");
+      return data;
     },
   };
 }

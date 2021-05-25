@@ -5,7 +5,13 @@ import { useParamsProjectId } from "./Hooks/useParamsProjectId";
 import { NumberInput } from "./FormComponents/NumberInput";
 import { useToast } from "./Hooks/useToast";
 import "./AddAcquisitionForm.css";
-export function AddAcquisitionForm({ checkedItemIds,setCheckedItemIds, setItems, cancel , setAcquiredFilter}) {
+export function AddAcquisitionForm({
+  checkedItemIds,
+  setCheckedItemIds,
+  setItems,
+  cancel,
+  setAcquiredFilter,
+}) {
   const toast = useToast();
   const projectId = useParamsProjectId();
   const [total, setTotal] = useState(0);
@@ -21,8 +27,10 @@ export function AddAcquisitionForm({ checkedItemIds,setCheckedItemIds, setItems,
         acquisitionType,
         projectId,
       });
+
       await Promise.all(
         checkedItemIds.map((itemId) => {
+          console.log(`edit item ${itemId}`)
           return itemServices.editItem({
             id: itemId,
             acquisitionId,
@@ -41,7 +49,9 @@ export function AddAcquisitionForm({ checkedItemIds,setCheckedItemIds, setItems,
       setTotal(0);
       setAcquiredFilter();
       toast.success("Acquisition logged");
-    } catch (error) {}
+    } catch (error) {
+      toast.error(error?.message || 'server error')
+    }
   }
   function handleSelect(e) {
     setAcquisitionType(e.target.value);

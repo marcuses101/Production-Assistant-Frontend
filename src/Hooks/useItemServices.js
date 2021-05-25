@@ -195,7 +195,10 @@ export function useItemServices() {
         Authorization: `Bearer ${token}`,
       },
     });
-    if (!response.ok) throw new Error("server error");
+    if (!response.ok) {
+      const data = await response.json();
+      throw new Error(data?.error?.message || "server error");
+    };
     },
   };
 }

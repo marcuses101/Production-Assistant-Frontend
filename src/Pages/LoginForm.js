@@ -7,7 +7,7 @@ import { useToast } from "../Hooks/useToast";
 import { useUserServices } from "../Hooks/useUserServices";
 
 export function LoginForm() {
-  const {userLogin} = useUserServices();
+  const { userLogin } = useUserServices();
   const toast = useToast();
   const formValidation = useFormValidation();
   const { push } = useHistory();
@@ -37,11 +37,11 @@ export function LoginForm() {
     e.preventDefault();
     if (!formValidation(validationArray)) return;
     try {
-      await userLogin({username,password})
-      push('/')
+      await userLogin({ username, password });
+      toast.success(`${username} logged in`);
+      push("/");
     } catch (error) {
-      console.error(error)
-      toast({ message: error, type: "error" });
+      toast.error(error?.message || "server error");
     }
   }
   function handleInputChange(e) {
@@ -53,35 +53,34 @@ export function LoginForm() {
   }
 
   return (
-    <main style={{margin:'1rem'}}>
-    <section className="UserLoginForm">
-      <form onSubmit={handleSubmit}>
-        <h2>User Login</h2>
-        <TextInput
-          id="username"
-          label="Username"
-          value={username}
-          error={usernameError}
-          onChange={handleInputChange}
-        />
-        <PasswordInput
-          id="password"
-          label="Password"
-          value={password}
-          error={passwordError}
-          onChange={handleInputChange}
-        />
-        <div className="flex-center">
-          <button type="submit" onClick={handleSubmit}>
-            Submit
-          </button>
-          <button type='button' className="cancel" onClick={() => push("/")}>
-            Cancel
-          </button>
-        </div>
-      </form>
-    </section>
-
+    <main style={{ margin: "1rem" }}>
+      <section className="UserLoginForm">
+        <form onSubmit={handleSubmit}>
+          <h2>User Login</h2>
+          <TextInput
+            id="username"
+            label="Username"
+            value={username}
+            error={usernameError}
+            onChange={handleInputChange}
+          />
+          <PasswordInput
+            id="password"
+            label="Password"
+            value={password}
+            error={passwordError}
+            onChange={handleInputChange}
+          />
+          <div className="flex-center">
+            <button type="submit" onClick={handleSubmit}>
+              Submit
+            </button>
+            <button type="button" className="cancel" onClick={() => push("/")}>
+              Cancel
+            </button>
+          </div>
+        </form>
+      </section>
     </main>
   );
 }
