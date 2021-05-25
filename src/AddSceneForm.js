@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {Link} from 'react-router-dom';
 import { TextInput } from "./FormComponents/TextInput";
 import { TextArea } from "./FormComponents/TextArea";
 import { useFormValidation } from "./Hooks/useFormValidation";
@@ -123,7 +124,11 @@ export function AddSceneForm() {
           error={descriptionError}
           onChange={onChange}
         />
-        <ItemSelector items={items} handleCheck={handleCheck} />
+        <h3>Add items to scene</h3>
+        {items.length > 0
+          ? <ItemSelector items={items} handleCheck={handleCheck} />
+          :<p>No items associated to this project. <Link to={`/project/${projectId}/item/add`}>Add Item</Link></p>}
+
         <div className="flex-center">
           <button type="submit">Submit</button>
           <button type="button" className="cancel" onClick={goBack}>

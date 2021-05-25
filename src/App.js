@@ -27,6 +27,7 @@ function App() {
       setIsDemo(false);
       setIsLoggedIn(true);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -69,6 +69,7 @@ h1 {
 h2 {
   color: var(--purple);
   text-shadow: var(--text-shadow);
+  margin-bottom:1rem;
 }
 
 h3 {
@@ -189,7 +190,9 @@ a.reset:hover{
   transform: scale(1.02);
 }
 
-
+p{
+  line-height: 1.66rem;
+}
 
 .flex-center {
   display: flex;

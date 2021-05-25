@@ -3,11 +3,9 @@ import { useAcquisitionServices } from "./Hooks/useAcquisitionServices";
 import { useItemServices } from "./Hooks/useItemServices";
 import { useParamsProjectId } from "./Hooks/useParamsProjectId";
 import { NumberInput } from "./FormComponents/NumberInput";
-import { useHistory } from "react-router-dom";
 import { useToast } from "./Hooks/useToast";
 import "./AddAcquisitionForm.css";
 export function AddAcquisitionForm({ checkedItemIds,setCheckedItemIds, setItems, cancel , setAcquiredFilter}) {
-  const { goBack } = useHistory();
   const toast = useToast();
   const projectId = useParamsProjectId();
   const [total, setTotal] = useState(0);

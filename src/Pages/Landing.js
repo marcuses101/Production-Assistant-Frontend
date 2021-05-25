@@ -9,20 +9,22 @@ const gridStyle = {
 };
 const articleStyle = {
   padding: "1rem",
-  borderRadius: 'var(--br)',
+  borderRadius: "var(--br)",
   boxShadow: "0px 0px 5px 1px var(--background-green)",
 };
 
 export function Landing() {
   return (
-    <main className="Landing" style={{ margin: "1rem auto" , width:'95vw'}}>
+    <main className="Landing" style={{ margin: "1rem auto", width: "95vw" }}>
       <section>
         <h1>Production Assistant</h1>
         <div style={gridStyle}>
           <article style={articleStyle}>
             <h2>About</h2>
             <p style={{ textAlign: "center" }}>
-              Welcome to the production app!
+              Use this application to help keep your film production organized. Manage
+              scenes, items, acquisitions. Keep track of the project's budget,
+              status of the upcoming scene, and items left to acquire!
             </p>
           </article>
           <article style={articleStyle}>

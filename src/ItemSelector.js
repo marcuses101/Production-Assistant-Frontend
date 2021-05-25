@@ -3,15 +3,17 @@ import React from "react";
 const liStyle = {
   display: "grid",
   gridTemplateColumns: "repeat( auto-fit, minmax(100px, 1fr) )",
+  boxShadow: "var(--box-shadow-outline)",
+  borderRadius: "5px",
+  padding: ".5rem",
 };
 
 export function ItemSelector({ items, handleCheck }) {
-
   const listItems = items.map((item) => {
     return (
-      <li key={item.id} style={liStyle}>
-        <span>
-          <label htmlFor={`checkbox-${item.id}`}>
+      <label htmlFor={`checkbox-${item.id}`}>
+        <li key={item.id} style={liStyle}>
+          <span>
             Select:
             <br />
             <input
@@ -22,20 +24,20 @@ export function ItemSelector({ items, handleCheck }) {
               checked={item.checked ?? false}
               onChange={handleCheck}
             />
-          </label>
-        </span>
+          </span>
 
-        <span>
-          <strong>Name: </strong>
-          <br />
-          {item.name}
-        </span>
-        <span>
-          <strong>Acquired: </strong>
-          <br />
-          {item.acquired ? "Yes" : "No"}
-        </span>
-      </li>
+          <span>
+            <strong>Name: </strong>
+            <br />
+            {item.name}
+          </span>
+          <span>
+            <strong>Acquired: </strong>
+            <br />
+            {item.acquired ? "Yes" : "No"}
+          </span>
+        </li>
+      </label>
     );
   });
   return <ul>{listItems}</ul>;
