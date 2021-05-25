@@ -25,7 +25,6 @@ export function ShoppingList() {
         setAcquiredFilter();
       } else {
         const { acquired } = items.find(({ id }) => id === itemId);
-        console.log({ acquired });
         setAcquiredFilter(acquired);
       }
       return newArray;
