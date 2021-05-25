@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { AddProjectForm } from "../AddProjectForm";
-import { ProjectList } from "../ProjectList";
+import { AddProjectForm } from "../Pages/AddProjectForm";
+import { ProjectList } from "../Pages/ProjectList";
 import { ProjectRouter } from "./ProjectRouter";
 
 export function AppRouter() {

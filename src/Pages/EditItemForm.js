@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { QuantityInput } from "./FormComponents/QuantityInput";
-import { TextArea } from "./FormComponents/TextArea";
-import { TextInput } from "./FormComponents/TextInput";
-import { useFormValidation } from "./Hooks/useFormValidation";
-import { useItemServices } from "./Hooks/useItemServices";
-import { useToast } from "./Hooks/useToast";
+import { QuantityInput } from "../FormComponents/QuantityInput";
+import { TextArea } from "../FormComponents/TextArea";
+import { TextInput } from "../FormComponents/TextInput";
+import { useFormValidation } from "../Hooks/useFormValidation";
+import { useItemServices } from "../Hooks/useItemServices";
+import { useToast } from "../Hooks/useToast";
 import { useHistory, useParams } from "react-router-dom";
 
 export function EditItemForm({ projectId }) {

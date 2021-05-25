@@ -26,6 +26,7 @@ function NotificationReducer(notifications, action) {
       return notifications;
   }
 }
+// React transition group animation styles
 const defaultStyle = {
   transition: "transform var(--time) ease, opacity var(--time) ease",
   opacity: 0,

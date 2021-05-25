@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { TextInput } from "./FormComponents/TextInput";
-import { TextArea } from "./FormComponents/TextArea";
-import { useSceneServices } from "./Hooks/useSceneServices";
-import { useParamsSceneId } from "./Hooks/useParamsSceneId";
+import { TextInput } from "../FormComponents/TextInput";
+import { TextArea } from "../FormComponents/TextArea";
+import { useSceneServices } from "../Hooks/useSceneServices";
+import { useParamsSceneId } from "../Hooks/useParamsSceneId";
 import { useHistory } from "react-router-dom";
-import { useFormValidation } from "./Hooks/useFormValidation";
-import { useToast } from "./Hooks/useToast";
-import { toDateString } from "./utils";
-import { useItemServices } from "./Hooks/useItemServices";
-import { useParamsProjectId } from "./Hooks/useParamsProjectId";
-import { ItemSelector } from "./ItemSelector";
+import { useFormValidation } from "../Hooks/useFormValidation";
+import { useToast } from "../Hooks/useToast";
+import { toDateString } from "../utils";
+import { useItemServices } from "../Hooks/useItemServices";
+import { useParamsProjectId } from "../Hooks/useParamsProjectId";
+import { ItemSelector } from "../Components/ItemSelector";
 
-export default function EditSceneForm() {
+export function EditSceneForm() {
   const { goBack } = useHistory();
   const toast = useToast();
   const itemServices = useItemServices();

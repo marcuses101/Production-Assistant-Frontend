@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { NumberInput } from "./FormComponents/NumberInput";
-import { TextArea } from "./FormComponents/TextArea";
-import { TextInput } from "./FormComponents/TextInput";
-import { useProjectServices } from "./Hooks/useProjectServices";
+import { NumberInput } from "../FormComponents/NumberInput";
+import { TextArea } from "../FormComponents/TextArea";
+import { TextInput } from "../FormComponents/TextInput";
+import { useProjectServices } from "../Hooks/useProjectServices";
 import { useHistory } from "react-router-dom";
-import { useFormValidation } from "./Hooks/useFormValidation";
+import { useFormValidation } from "../Hooks/useFormValidation";
 
 export function AddProjectForm() {
   const formValidation = useFormValidation();

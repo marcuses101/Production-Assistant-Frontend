@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {MemoryRouter} from 'react-router-dom';
-import {Sidenav} from './Sidenav';
+import {BudgetChart} from './BudgetChart';
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<MemoryRouter><Sidenav /></MemoryRouter>, div);
+    ReactDOM.render(<BudgetChart />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
-  

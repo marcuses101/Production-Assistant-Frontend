@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { NumberInput } from "./FormComponents/NumberInput";
-import { TextArea } from "./FormComponents/TextArea";
-import { TextInput } from "./FormComponents/TextInput";
-import { useFormValidation } from "./Hooks/useFormValidation";
-import { useParamsProjectId } from "./Hooks/useParamsProjectId";
-import { useProjectServices } from "./Hooks/useProjectServices";
-import { useToast } from "./Hooks/useToast";
+import { NumberInput } from "../FormComponents/NumberInput";
+import { TextArea } from "../FormComponents/TextArea";
+import { TextInput } from "../FormComponents/TextInput";
+import { useFormValidation } from "../Hooks/useFormValidation";
+import { useParamsProjectId } from "../Hooks/useParamsProjectId";
+import { useProjectServices } from "../Hooks/useProjectServices";
+import { useToast } from "../Hooks/useToast";
 
 export function EditProjectForm({ project, editProject }) {
   const formValidation = useFormValidation();
@@ -19,7 +19,7 @@ export function EditProjectForm({ project, editProject }) {
   const [nameError, setNameError] = useState(false);
   const [budget, setBudget] = useState(project?.budget || 0);
   const [budgetError, setBudgetError] = useState(false);
-  const [description, setDescription] = useState(project.description || "");
+  const [description, setDescription] = useState(project?.description || "");
   const [descriptionError, setDescriptionError] = useState(false);
 
   const validationArray = [

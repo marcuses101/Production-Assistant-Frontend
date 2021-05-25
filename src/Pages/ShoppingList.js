@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { useItemServices } from "./Hooks/useItemServices";
-import { useParamsProjectId } from "./Hooks/useParamsProjectId";
-import { useToast } from "./Hooks/useToast";
-import { AddAcquisitionForm } from "./AddAcquisitionForm";
+import { useItemServices } from "../Hooks/useItemServices";
+import { useParamsProjectId } from "../Hooks/useParamsProjectId";
+import { useToast } from "../Hooks/useToast";
+import { AddAcquisitionForm } from "../Components/AddAcquisitionForm";
 import "./ShoppingList.css";
 import { Link } from "react-router-dom";
 

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import {Link} from 'react-router-dom';
-import { TextInput } from "./FormComponents/TextInput";
-import { TextArea } from "./FormComponents/TextArea";
-import { useFormValidation } from "./Hooks/useFormValidation";
+import { TextInput } from "../FormComponents/TextInput";
+import { TextArea } from "../FormComponents/TextArea";
+import { useFormValidation } from "../Hooks/useFormValidation";
 import { useHistory } from "react-router-dom";
-import { useSceneServices } from "./Hooks/useSceneServices";
-import { useItemServices } from "./Hooks/useItemServices";
-import { useParamsProjectId } from "./Hooks/useParamsProjectId";
-import { toDateString } from "./utils";
-import { useToast } from "./Hooks/useToast";
-import { ItemSelector } from "./ItemSelector";
+import { useSceneServices } from "../Hooks/useSceneServices";
+import { useItemServices } from "../Hooks/useItemServices";
+import { useParamsProjectId } from "../Hooks/useParamsProjectId";
+import { toDateString } from "../utils";
+import { useToast } from "../Hooks/useToast";
+import { ItemSelector } from "../Components/ItemSelector";
 
 export function AddSceneForm() {
   const { goBack } = useHistory();

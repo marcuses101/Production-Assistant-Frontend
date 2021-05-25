@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {MemoryRouter} from 'react-router-dom';
-import {Sidenav} from './Sidenav';
+import {TextInput} from './TextInput';
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<MemoryRouter><Sidenav /></MemoryRouter>, div);
+    ReactDOM.render(<TextInput />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
   

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useAcquisitionServices } from "./Hooks/useAcquisitionServices";
-import { useItemServices } from "./Hooks/useItemServices";
-import { useParamsProjectId } from "./Hooks/useParamsProjectId";
-import { NumberInput } from "./FormComponents/NumberInput";
-import { useToast } from "./Hooks/useToast";
+import { useAcquisitionServices } from "../Hooks/useAcquisitionServices";
+import { useItemServices } from "../Hooks/useItemServices";
+import { useParamsProjectId } from "../Hooks/useParamsProjectId";
+import { NumberInput } from "../FormComponents/NumberInput";
+import { useToast } from "../Hooks/useToast";
 import "./AddAcquisitionForm.css";
 export function AddAcquisitionForm({
   checkedItemIds,
@@ -30,7 +30,6 @@ export function AddAcquisitionForm({
 
       await Promise.all(
         checkedItemIds.map((itemId) => {
-          console.log(`edit item ${itemId}`)
           return itemServices.editItem({
             id: itemId,
             acquisitionId,

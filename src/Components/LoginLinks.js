@@ -1,9 +1,10 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useUserServices } from "./Hooks/useUserServices";
-export default function LoginLinks() {
+import { useUserServices } from "../Hooks/useUserServices";
+export function LoginLinks() {
   const {demoLogin} = useUserServices();
-  const {push} = useHistory();
+  const history = useHistory();
+  const push = history?.push;
   function demoClick(){
     push('/');
     demoLogin();

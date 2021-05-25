@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
-import { EditProjectForm } from "../EditProjectForm";
-import { AddItemForm } from "../AddItemForm";
-import { EditItemForm } from "../EditItemForm";
+import { EditProjectForm } from "../Pages/EditProjectForm";
+import { AddItemForm } from "../Pages/AddItemForm";
+import { EditItemForm } from "../Pages/EditItemForm";
 import { ProjectDashboard } from "../Pages/ProjectDashboard";
-import { AddSceneForm } from "../AddSceneForm";
-import EditSceneForm from "../EditSceneForm";
-import {AddAcquisitionForm} from '../AddAcquisitionForm'
+import { AddSceneForm } from "../Pages/AddSceneForm";
+import {EditSceneForm} from "../Pages/EditSceneForm";
 import { Sidenav } from "./Sidenav";
-import "./ProjectRouter.css";
 import { useProjectServices } from "../Hooks/useProjectServices";
 import { useParamsProjectId } from "../Hooks/useParamsProjectId";
-import { ShoppingList } from "../ShoppingList";
+import { ShoppingList } from "../Pages/ShoppingList";
 import { NavButton } from './NavButton'
+import "./ProjectRouter.css";
 
 export function ProjectRouter() {
   const {push} = useHistory()
@@ -53,7 +52,6 @@ export function ProjectRouter() {
         <h1>{project?.name}</h1>
         <Switch>
           <Route path={`${path}/scene/add`} component={AddSceneForm} />
-          <Route path={`${path}/acquisition/add`} component={AddAcquisitionForm}/>
           <Route
             path="/project/:projectId/scene/edit/:sceneId"
             component={EditSceneForm}

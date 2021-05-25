@@ -8,7 +8,7 @@ const liStyle = {
   padding: ".5rem",
 };
 
-export function ItemSelector({ items, handleCheck }) {
+export function ItemSelector({ items = [], handleCheck }) {
   const listItems = items.map((item) => {
     return (
       <label key={item.id} htmlFor={`checkbox-${item.id}`}>

@@ -15,6 +15,7 @@ export default function Notification({
     }, 4000);
   }, [id, dispatch]);
 
+  // Container to hold toast notifications
   return (
     <div
       style={{ ...defaultStyle, ...style }}
