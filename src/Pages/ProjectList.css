@@ -1,0 +1,4 @@
+.ProjectList {
+  max-width: max(400px, 50vw);
+  margin: 0 auto;
+}

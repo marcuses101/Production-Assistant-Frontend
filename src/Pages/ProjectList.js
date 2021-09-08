@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useProjectServices } from "../Hooks/useProjectServices";
 import {useUserServices} from '../Hooks/useUserServices'
+import './ProjectList.css'
 export function ProjectList() {
   const [projects, setProjects] = useState([]);
   const projectServices = useProjectServices();
